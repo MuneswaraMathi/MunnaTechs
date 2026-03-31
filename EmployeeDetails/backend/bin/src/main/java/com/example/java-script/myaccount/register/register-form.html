@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>register</title>
+    <link rel="stylesheet" type="text/css" href="register.css" />
+    <script src="register.js"></script>
+  </head>
+  <body>
+    <div id="registerForm">
+      <form onsubmit="return validateForm()">
+        <label>First Name:</label>
+        <input type="text" name="firstName" placeholder="First Name" />
+        <div id="firstNameError" class="error"></div>
+        <br />
+
+        <label>Middle Name:</label>
+        <input type="text" name="middleName" placeholder="Middle Name" />
+        <div id="middleNameError" class="error"></div>
+        <br />
+
+        <label>Last Name:</label>
+        <input type="text" name="lastName" placeholder="Last Name" />
+        <div id="lastNameError" class="error"></div>
+        <br />
+
+        <label>Email: </label>
+        <input type="text" name="email" placeholder="Email" />
+        <div id="emailError" class="error"></div>
+        <br />
+
+        <label>Password: </label>
+        <input type="password" name="password" placeholder="Password" />
+        <div id="passwordError" class="error"></div>
+        <br />
+
+        <label>Confirm Password: </label>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+        <div id="confirmPasswordError" class="error"></div>
+        <br />
+
+        <label>Aadhar: </label>
+        <input type="text" name="document" placeholder="Document Number" />
+        <div id="documentError" class="error"></div>
+        <br />
+
+        <label>Phone:</label>
+        <input type="text" name="phoneNumber" placeholder="Phone Number" />
+        <div id="phoneNumberError" class="error"></div>
+        <br/>
+
+        <label>Gender:</label>
+        
+        <input type="radio" name="gender" value="male" id="male" />
+        <label for="male">Male</label>
+        <input type="radio" name="gender" value="female" id="female" />
+        <label for="female">Female</label>
+        <div id="genderError" class="error"></div>
+        <br />
+
+        <label>Skills:</label>
+        <input type="checkbox" name="skill" value="java" /> Java
+        <input type="checkbox" name="skill" value="javascript" /> JavaScript
+        <input type="checkbox" name="skill" value="react" /> React
+        <input type="checkbox" name="skill" value="nodejs" /> Nodejs
+        <br />
+        <div id="skillError" class="error"></div>
+        <br />
+
+        <label>Country:</label>
+        <select name="country" style="width: 100px">
+          <option>India</option>
+          <option>USA</option>
+          <option>Chile</option>
+        </select>
+        <br/><br/>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
+</html>

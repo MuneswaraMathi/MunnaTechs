@@ -1,0 +1,73 @@
+
+/* Page Layout */
+.register-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Box */
+.register-card {
+  width: 400px;
+  max-width: 90%;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form */
+.register-form {
+  margin-top: 20px;
+}
+
+/* Input Wrapper */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Input Fields */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Button */
+.register-button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+/* Login Text */
+.login-text {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-link {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

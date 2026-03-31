@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="login.css" />
+    <script src="login.js"></script>
+</head>
+<body>
+    <div id="loginForm">
+        <form onsubmit="return validateForm()">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" />
+            <div id="emailError" class="error"></div>
+            <br/>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"/>
+            <div id="passwordError" class="error"></div>
+            <br/>
+            <button type="submit">Login</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

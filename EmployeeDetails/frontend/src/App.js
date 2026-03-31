@@ -1,14 +1,49 @@
 import React from 'react';
-import EmployeeList from './components/EmployeeList';
-import EmployeeForm from './components/EmployeeForm';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import Register from './components/Register';
+import Login from './components/Login';
+import Welcome from "./components/Welcome";
+import Profile from "./components/Profile";
+import Logout from "./components/Logout";
+import SaveContribution from './components/contribution/SaveContribution';
+import AddAddress from './components/address/AddAddress';
+import ShowAddresses from'./components/address/ShowAddresses';
+import ShowContributions from './components/contribution/ShowContributions';
+import ShowPersonalInfo from './components/personalInfo/ShowPersonalInfo';
 
-export default function App() {
+function App() {
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Employee Management</h2>
-      <EmployeeForm />
-      <hr />
-      <EmployeeList />
-    </div>
+    <Router>
+      <div style={{maxWidth:600, margin:'40px auto', fontFamily:'Arial, sans-serif'}}>
+        <nav>
+          <Link 
+            to="/home" 
+            style={{ 
+              marginRight: '20px', 
+              textDecoration: 'none', 
+              color: '#007bff' 
+            }}
+          >
+          </Link>
+        </nav>
+        
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path='/personalDetails/showPersonalInfo' element={<ShowPersonalInfo/>}/>
+          <Route path='/address/addAddress' element={<AddAddress/>}/>
+          <Route path='/address/getAddress' element={<ShowAddresses/>}/>
+          <Route path='/contributions/showContributions' element={<ShowContributions/>}/>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/contributions/saveContribution" element={<SaveContribution />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
+export default App;

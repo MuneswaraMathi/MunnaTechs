@@ -1,0 +1,29 @@
+.contributions-container {
+  padding: 20px;
+}
+
+.contributions-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.contribution-card {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.contribution-card strong {
+  font-size: 16px;
+}
+
+.loading-text {
+  font-size: 18px;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+}

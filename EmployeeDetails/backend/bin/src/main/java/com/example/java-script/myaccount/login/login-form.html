@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>login form</title>
+    <script>
+      function validateForm() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const usernameError = document.getElementById("usernameError");
+        const passwordError = document.getElementById("passwordError");
+
+        // Clear previous messages
+        usernameError.innerText = "";
+        passwordError.innerText = "";
+
+        let isValid = true;
+
+        // Regex: must start with a letter
+        const usernamePattern = /^[A-Za-z].*/;
+
+        if (username === "") {
+          usernameError.innerText = "Username is required.";
+          isValid = false;
+          return isValid;
+        }else if(!usernamePattern.test(username)){
+          usernameError.innerText = "Username must start with a letter.";
+          isValid = false;
+          return isValid;
+        }
+
+        if (password === "") {
+          passwordError.innerText = "Password is required.";
+          isValid = false;
+          return isValid;
+        }
+
+        return isValid; // Prevent submit if false
+      }
+    </script>
+
+    <style>
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+    #loginButton {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #loginForm {
+        padding: 20px;
+        margin: 50px;
+    }
+</style>
+
+  </head>
+  <body>
+    <div id="loginForm">
+    <h2>login form</h2>
+    <form onsubmit="return validateForm()" action="/myaccount/profile.jsp">
+      <div>
+        <input type="text" id="username" placeholder="Username" />
+        <div id="usernameError" class="error"></div>
+      </div>
+       <br/>
+      <div>
+        <input type="password" id="password" placeholder="Password" />
+        <div id="passwordError" class="error"></div>
+      </div>
+      <br/>
+      <button id="loginButton" type="submit" onclick="return validateForm();">Login</button>
+    </form>
+    </div>
+  </body>
+</html>
