@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import logger from "../../utils/logger";
+import NavDropdowns from "../NavDropdowns";
 import { getContributionsByEmail } from './editContribution';
 import './showContribution.css';
 
 export default function ShowContributions() {
-
+  const navigate = useNavigate();
   const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -19,7 +21,15 @@ export default function ShowContributions() {
       const email = localStorage.getItem('email');
       logger.info('email: ', email);
       const res = await getContributionsByEmail(email);
-      setContributions(res.data);
+      const contributionsData = res.data.map(contribution => ({
+        id: contribution.id,
+        name: contribution.name,
+        amount: contribution.amount,
+        email: contribution.email,
+        phoneNumber: contribution.phoneNumber,
+        date: new Date(contribution.date).toLocaleDateString()
+      }));
+      setContributions(contributionsData);
     } catch (err) {
       setError('Failed to load contributions');
       console.error(err);
@@ -33,17 +43,18 @@ export default function ShowContributions() {
 
   return (
     <div className="contributions-container">
-      <h2 className="contributions-title">Contributions</h2>
-
-      {contributions.map((contribution) => (
+      <NavDropdowns />
+      {contributions.length === 0 ? (
+        <p className="loading-text">Contributions Not Found</p>
+      ) : contributions.map((contribution) => (
         <div key={contribution.id} className="contribution-card">
           <div><strong>Name:</strong> {contribution.name}</div>
           <div><strong>Amount:</strong> {contribution.amount}</div>
           <div><strong>Email:</strong> {contribution.email}</div>
           <div><strong>Phone:</strong> {contribution.phoneNumber}</div>
           <div><strong>Date:</strong> {contribution.date}</div>
-        </div>
-      ))}
+        </div> 
+      ))} 
     </div>
   );
 }

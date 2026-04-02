@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import Home from './components/Home';
+import AboutUs from './components/AboutUs';
+import Services from './components/Services';
 import Register from './components/Register';
 import Login from './components/Login';
 import Welcome from "./components/Welcome";
@@ -11,6 +13,12 @@ import AddAddress from './components/address/AddAddress';
 import ShowAddresses from'./components/address/ShowAddresses';
 import ShowContributions from './components/contribution/ShowContributions';
 import ShowPersonalInfo from './components/personalInfo/ShowPersonalInfo';
+
+function RequireAuth({ children }) {
+  const hasToken = Boolean(localStorage.getItem('token'));
+  const hasRegisteredUser = Boolean(localStorage.getItem('email'));
+  return (hasToken || hasRegisteredUser) ? children : <Navigate to="/login" replace />;
+}
 
 function App() {
   return (
@@ -30,13 +38,36 @@ function App() {
         
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path='/personalDetails/showPersonalInfo' element={<ShowPersonalInfo/>}/>
-          <Route path='/address/addAddress' element={<AddAddress/>}/>
-          <Route path='/address/getAddress' element={<ShowAddresses/>}/>
+          <Route
+            path='/address/addAddress'
+            element={
+              <RequireAuth>
+                <AddAddress/>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/address/getAddress'
+            element={
+              <RequireAuth>
+                <ShowAddresses/>
+              </RequireAuth>
+            }
+          />
           <Route path='/contributions/showContributions' element={<ShowContributions/>}/>
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/contributions/saveContribution" element={<SaveContribution />} />

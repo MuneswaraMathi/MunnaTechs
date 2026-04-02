@@ -1,38 +1,15 @@
 import { Link } from 'react-router-dom';
-import Dropdown from "./Dropdown";
+import NavDropdowns from "./NavDropdowns";
 
 export default function Profile() {
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
+    const firstName = localStorage.getItem('firstName');
     const email = localStorage.getItem('email');
 
     return (
     <div>
-      <div style={{ display: 'flex', gap: '20px' }}>  
-
-        <Dropdown
-          title="PersonalInfo"
-          items={[
-            { label: "View PersonalInfo", to: "/personalDetails/showPersonalInfo" }
-          ]}
-        />
-
-        <Dropdown
-          title="Address"
-          items={[
-            { label: "Add Address", to: "/address/addAddress" },
-            { label: "View Address", to: "/address/getAddress" }
-          ]}
-        />
-
-        <Dropdown
-          title="Contributions"
-          items={[
-            { label: "Add Contribution", to: "/contributions/saveContribution" },
-            { label: "View Contributions", to: "/contributions/showContributions" }
-          ]}
-        />
-      </div>
+      <NavDropdowns />
 
             <div style={{ position: 'right', zIndex:1 ,padding: "40px", display: "flex"}}>
                 <div style={{ 
@@ -42,12 +19,12 @@ export default function Profile() {
                     padding: "20px",
                     textAlign: "right"
                 }}>
-                    <h6>Welcome! {userName}</h6>
+                    <h6>Welcome! {firstName}</h6>
                 </div>
          
                 <div>
                   <Link 
-                                to="/logout" 
+                                to="/logout"
                                 style={{
                                         position: "absolute",
                                         top: 0,

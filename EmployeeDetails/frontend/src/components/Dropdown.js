@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
-function Dropdown({ title, items }) {
-  const [open, setOpen] = useState(false);
-
+function Dropdown({ title, items, isOpen, onToggle, onOpen, onClose }) {
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         style={{
           backgroundColor: "rgba(255,255,255,0.8)",
           border: "1px solid #ccc",
@@ -20,7 +17,7 @@ function Dropdown({ title, items }) {
         {title} ⌄
       </button>
 
-      {open && (
+      {isOpen && (
         <div
           style={{
             position: "absolute",
@@ -43,7 +40,15 @@ function Dropdown({ title, items }) {
                 textDecoration: "none",
                 color: "#333"
               }}
-              onClick={() => setOpen(false)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#f0f4ff";
+                e.currentTarget.style.color = "#007bff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = "#333";
+              }}
+              onClick={onToggle}
             >
               {item.label}
             </Link>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logger from "../../utils/logger";
+import NavDropdowns from "../NavDropdowns";
 import {
   getPersonalInfoByEmail,
   updatePersonalInfoById
@@ -13,6 +15,7 @@ export default function ShowPersonalInfo() {
   const [editForm, setEditForm] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPersonalInfos();
@@ -24,6 +27,10 @@ export default function ShowPersonalInfo() {
       logger.info('email: ', email);
 
       const res = await getPersonalInfoByEmail(email);
+      const firstName = Array.isArray(res.data) ? res.data[0]?.firstName : res.data?.firstName;
+      if (firstName) {
+        localStorage.setItem("firstName", firstName);
+      }
       setPersonalInfos(res.data);
     } catch (err) {
       setError('Failed to load personal details');
@@ -50,6 +57,7 @@ export default function ShowPersonalInfo() {
       await updatePersonalInfoById(editingId, editForm);
       setEditingId(null);
       fetchPersonalInfos();
+      navigate('/profile');
     } catch (err) {
       console.error(err);
       alert("Failed to update personal info");
@@ -61,8 +69,7 @@ export default function ShowPersonalInfo() {
 
   return (
     <div className="personal-container">
-      <h2 className="personal-title">Personal Info</h2>
-
+      <NavDropdowns />
       {personalInfos.map((personalInfo) => (
         <div key={personalInfo.id} className="personal-card">
 

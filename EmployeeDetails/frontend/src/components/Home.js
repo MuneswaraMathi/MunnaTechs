@@ -29,24 +29,31 @@ export default function Home() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        minHeight: '100vh',
+        backgroundAttachment: 'fixed',
+        height: '100vh',
         width: '100vw',
-
-        display: 'flex',               // ✅ make it flex
-        justifyContent: 'center',     // ✅ top
-        alignItems: 'center',        // ✅ horizontal center
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        margin: 0,
+        padding: 0,
+        paddingTop: '20px',
       }}
     >
       <div
         style={{
           display: 'flex',
           gap: '20px',
-          marginTop: '-799px'           // spacing from top
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Link to="/register" style={linkStyle}>Register</Link>
-        <Link to="/login" style={linkStyle}>About Us</Link>
-        <Link to="/login" style={linkStyle}>Services</Link>
+        <Link to="/login" style={linkStyle}>Login</Link>
+        <Link to="/aboutUs" style={linkStyle}>About Us</Link>
+        <Link to="/services" style={linkStyle}>Services</Link>
       </div>
     </div>
   );

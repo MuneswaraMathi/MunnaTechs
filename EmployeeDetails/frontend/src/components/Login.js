@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import logger from '../utils/logger';
-
+import { getPersonalInfoByEmail } from './personalInfo/editPersonalInfo';
 export default function Login(){
   const [form,setForm] = useState({ email:'', password:'' });
 const navigate = useNavigate();
@@ -12,11 +12,17 @@ const navigate = useNavigate();
       const res = await axios.post('http://localhost:8080/auth/login', form);
       localStorage.setItem('token', res.data.token);
 
-      console.log('userName:', res.data.userName);
+      const personalInfo = await getPersonalInfoByEmail(form.email);
+            const firstName = Array.isArray(personalInfo.data) ? personalInfo.data[0]?.firstName : personalInfo.data?.firstName;
+            if (firstName) {
+              localStorage.setItem("firstName", firstName);
+            }
+
+      console.log('firstName:', firstName);
       console.log('email:', res.data.email);
       localStorage.setItem('userName', res.data.userName);
       localStorage.setItem('email', res.data.email);
-      // Redirect to welcome page
+      // Redirect to profile page
       navigate('/profile');
     } catch (err) {
       alert('Login failed: ' + (err.response?.data?.error || err.message));
@@ -78,6 +84,12 @@ const navigate = useNavigate();
             Login
           </button>
       </form>
+      <p className="login-text">
+         don't have an account?{" "}
+          <Link to="/register" className="login-link">
+            Register here
+          </Link>
+        </p>
       </div>
     </div>
   );

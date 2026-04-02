@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logger from "../../utils/logger";
+import NavDropdowns from "../NavDropdowns";
 import {
   getAddressesByEmail,
   updateAddressById,
@@ -8,12 +10,12 @@ import {
 import "./showAddress.css";
 
 export default function ShowAddresses() {
+  const navigate = useNavigate();
   const [addresses, setAddresses] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   useEffect(() => {
     fetchAddresses();
   }, []);
@@ -23,6 +25,10 @@ export default function ShowAddresses() {
       const email = localStorage.getItem("email");
       logger.info("Fetching addresses for:", email);
       const data = await getAddressesByEmail(email);
+      const firstName = Array.isArray(data) ? data[0]?.firstName : data?.firstName;
+      if (firstName) {
+        localStorage.setItem("firstName", firstName);
+      }
       setAddresses(data);
     } catch (err) {
       setError("Failed to load addresses");
@@ -63,11 +69,17 @@ export default function ShowAddresses() {
 
   if (loading) return <p>Loading addresses...</p>;
   if (error) return <p className="error-text">{error}</p>;
+  if (!addresses || addresses.length === 0)
+    return (
+      <div className="address-container">
+        <NavDropdowns />
+        <p>No address found</p>
+      </div>
+    );
 
   return (
     <div className="address-container">
-      <h2>Addresses</h2>
-
+      <NavDropdowns />
       {addresses.map((addr) => (
         <div key={addr.id} className="address-card">
           {editingId === addr.id ? (

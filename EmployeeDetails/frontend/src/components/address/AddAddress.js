@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logger from "../../utils/logger";
+import NavDropdowns from "../NavDropdowns";
 import "./address.css";
 import {validateAddressForm} from "./addressValidation";
 
@@ -39,7 +40,7 @@ const submitForm = async(e)=>{
 
 return(
 <div className="add-address-container">
-      <h2>Add New Address</h2>
+      <NavDropdowns />
       <form onSubmit={submitForm} className="address-form">
         {Object.keys(form).map((field) => (
           <div key={field}>

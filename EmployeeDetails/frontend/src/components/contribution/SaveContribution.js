@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logger from '../../utils/logger';
+import NavDropdowns from '../NavDropdowns';
 import "./saveContribution.css";
 import {validateContributionForm} from "./contributionValidation";
 
@@ -33,8 +34,7 @@ const navigate = useNavigate();
 
   return (
       <div className="contribution-container">
-      <h2>Contribution</h2>
-
+      <NavDropdowns />
       <form onSubmit={submitForm} className="contribution-form">
         <div>
           <input

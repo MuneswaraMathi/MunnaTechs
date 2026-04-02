@@ -1,0 +1,4 @@
+
+
+
+ python3 /Users/muneswar/github-repos/MunnaTechs/EmployeeDetails/scan_videos_for_image.py --videos-dir /Users/muneswar/github-repos/MunnaTechs/EmployeeDetails/tmp_test_media --image /Users/muneswar/github-repos/MunnaTechs/EmployeeDetails/tmp_test_media/target.png --threshold 0.8 --sample-seconds 0.2
