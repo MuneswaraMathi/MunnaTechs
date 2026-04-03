@@ -3,7 +3,10 @@ package com.example.contributions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ContributionService {
@@ -30,5 +33,17 @@ public class ContributionService {
 
     public void deleteContribution(@NonNull Long id) {
         repository.deleteById(id);
+    }
+
+    public List<Map<String, Object>> getTotalFundsByActivity() {
+        List<Object[]> rows = repository.findTotalByActivityName();
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Object[] row : rows) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("activityName", row[0] != null ? row[0] : "Unspecified");
+            map.put("total", row[1]);
+            result.add(map);
+        }
+        return result;
     }
 }

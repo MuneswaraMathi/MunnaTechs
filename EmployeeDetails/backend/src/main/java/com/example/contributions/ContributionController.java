@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 import java.util.List;
@@ -52,13 +51,8 @@ public class ContributionController {
         }
     }
 
-    @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> handleOptions() {
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/showContributions")
-    public ResponseEntity<List<Contribution>> getAllContributions(@RequestParam String email) {
+    public ResponseEntity<List<Contribution>> getAllContributions(@RequestParam(required = false) String email) {
         logger.debug("Fetching all contributions");
         List<Contribution> contributions = service.getAllContributions();
         logger.info("Retrieved {} contributions", contributions.size());
@@ -91,5 +85,11 @@ public class ContributionController {
         service.deleteContribution(id);
         logger.info("Contribution deleted successfully with ID: {}", id);
         return ResponseEntity.ok(Map.of("message", "Contribution deleted successfully"));
+    }
+
+    @GetMapping("/totalFundsByActivity")
+    public ResponseEntity<List<Map<String, Object>>> getTotalFundsByActivity() {
+        logger.info("Fetching total funds by activity");
+        return ResponseEntity.ok(service.getTotalFundsByActivity());
     }
 }

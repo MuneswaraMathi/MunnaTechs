@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
@@ -79,17 +78,29 @@ private static final Logger logger = LoggerFactory.getLogger(AddressController.c
 
     @GetMapping("/getAddress/{email}")
     public ResponseEntity<List<Address>> getAddressByEmail(@PathVariable String email) {
-        logger.debug("Fetching all address with email");
+        logger.debug("Fetching all address with email: {}", email);
         AddressResponse addresses = service.getAddressByEmail(email);
-        logger.info("Retrieved {} addresses", addresses.getAddressList().size());
+        logger.info("Retrieved {} addresses for email: {}", addresses.getAddressList().size(), email);
+        return ResponseEntity.ok(addresses.getAddressList());
+    }
+
+    @GetMapping("/getAddressesByEmailId/{emailId}")
+    public ResponseEntity<?> getAddressesByEmailId(@PathVariable String emailId) {
+        logger.debug("Fetching addresses for emailId: {}", emailId);
+        AddressResponse addresses = service.getAddressByEmail(emailId);
+        if (addresses.getAddressList() == null || addresses.getAddressList().isEmpty()) {
+            logger.warn("No addresses found for emailId: {}", emailId);
+            return ResponseEntity.status(404).body(Map.of("error", "No addresses found for the given emailId"));
+        }
+        logger.info("Retrieved {} addresses for emailId: {}", addresses.getAddressList().size(), emailId);
         return ResponseEntity.ok(addresses.getAddressList());
     }
     
-     @GetMapping("/getAddress/cityName")
-    public ResponseEntity<List<Address>> getAddressByCityName(@RequestParam String cityName) {
-        logger.debug("Fetching all address with email");
+     @GetMapping("/getAddress/cityName/{cityName}")
+    public ResponseEntity<List<Address>> getAddressByCityName(@PathVariable String cityName) {
+        logger.debug("Fetching all address with cityName: {}", cityName);
         AddressResponse addresses = service.getAddressByCity(cityName);
-        logger.info("Retrieved {} addresses", addresses.getAddressList().size());
+        logger.info("Retrieved {} addresses for cityName: {}", addresses.getAddressList().size(), cityName);
         return ResponseEntity.ok(addresses.getAddressList());
     }
 

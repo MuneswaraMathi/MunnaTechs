@@ -8,7 +8,7 @@ export default function Profile() {
     const email = localStorage.getItem('email');
 
     return (
-    <div>
+    <div style={{ width: "700px", margin: "30px auto" }}>
       <NavDropdowns />
 
             <div style={{ position: 'right', zIndex:1 ,padding: "40px", display: "flex"}}>

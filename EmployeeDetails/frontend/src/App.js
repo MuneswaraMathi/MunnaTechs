@@ -15,6 +15,7 @@ import ShowContributions from './components/contribution/ShowContributions';
 import ShowPersonalInfo from './components/personalInfo/ShowPersonalInfo';
 import AddActivity from './components/activity/AddActivity';
 import ShowActivities from './components/activity/ShowActivities';
+import FundsReport from './components/contribution/FundsReport';
 
 function RequireAuth({ children }) {
   const hasToken = Boolean(localStorage.getItem('token'));
@@ -75,6 +76,7 @@ function App() {
           <Route path="/contributions/saveContribution" element={<SaveContribution />} />
           <Route path="/activities/addActivity" element={<RequireAuth><AddActivity /></RequireAuth>} />
           <Route path="/activities/showActivities" element={<RequireAuth><ShowActivities /></RequireAuth>} />
+          <Route path="/contributions/fundsReport" element={<RequireAuth><FundsReport /></RequireAuth>} />
         </Routes>
       </div>
     </Router>

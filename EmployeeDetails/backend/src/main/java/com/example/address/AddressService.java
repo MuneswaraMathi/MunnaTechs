@@ -73,14 +73,10 @@ public class AddressService {
             response.setMessage("Address Successfully updated with");
         existingAddress.setFirstName(updatedAddress.getFirstName());
         existingAddress.setLastName(updatedAddress.getLastName());
+        existingAddress.setFatherName(updatedAddress.getFatherName());
         existingAddress.setStreetName(updatedAddress.getStreetName());
-        existingAddress.setCity(updatedAddress.getCity());
-        existingAddress.setState(updatedAddress.getState());
-        existingAddress.setEmail(updatedAddress.getEmail());
         existingAddress.setHouseNumber(updatedAddress.getHouseNumber());
         existingAddress.setLandMark(updatedAddress.getLandMark());
-        existingAddress.setMobileNumber(updatedAddress.getMobileNumber());
-        existingAddress.setPostalCode(updatedAddress.getPostalCode());
         existingAddress.setModifiedDte(updatedAddress.getModifiedDte());
         repository.save(existingAddress);
          }else{

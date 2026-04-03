@@ -24,27 +24,16 @@ export const validateAddressForm = (form) => {
       errors.streetName = "Street Name must contain only letters (min 2)";
     }
 
-  if (!form.city.trim()) {
-    errors.city = "City is required";
-  }else if(!/^[A-Za-z0-9]{2,}$/.test(form.city.trim())) {
-      errors.city = "City must contain only letters (min 2)";
+  if (!form.fatherName.trim()) {
+    errors.fatherName = "Father Name is required";
+  }else if(!/^(?=.{2,}$)[A-Za-z]+(?: [A-Za-z]+)*$/.test(form.fatherName.trim())) {
+      errors.fatherName = "Father Name must contain only letters (min 2)";
     }
 
-  if (!form.state.trim()) {
-    errors.state = "State is required";
-  }
-
-  if (!/^\d{6}$/.test(form.postalCode)) {
-    errors.postalCode = "Postal Code must be 6 digits";
-  }
-
-  if (!/^[6-9]\d{9}$/.test(form.mobileNumber)) {
-    errors.mobileNumber =
-      "Mobile number must be 10 digits and start with 6-9";
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = "Enter valid email";
+  if (!form.email || !form.email.trim()) {
+    errors.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+    errors.email = "Enter a valid email address";
   }
 
   return errors;

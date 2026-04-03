@@ -14,6 +14,7 @@ public class Contribution {
     private String name;
     private String email;
     private String phoneNumber;
+    private String activityName;
     private Date date;
 
 
@@ -78,5 +79,13 @@ public class Contribution {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 }

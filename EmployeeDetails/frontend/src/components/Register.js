@@ -30,9 +30,9 @@ export default function Register() {
     }
     try {
       const res = await axios.post("http://localhost:8080/auth/register", form);
-      localStorage.setItem("firstName", res.data.firstName);
-      localStorage.setItem("lastName", res.data.lastName);
-      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("firstName", form.firstName);
+      localStorage.setItem("lastName", form.lastName);
+      localStorage.setItem("email", form.email);
       navigate("/profile");
     } catch (err) {
       logger.error("Registration failed:", err);

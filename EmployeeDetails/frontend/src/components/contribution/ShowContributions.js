@@ -19,7 +19,7 @@ export default function ShowContributions() {
   const fetchContributions = async () => {
     try {
       const email = localStorage.getItem('email');
-      logger.info('email: ', email);
+      logger.info('fetching contributions for email: ', email);
       const res = await getContributionsByEmail(email);
       const contributionsData = res.data.map(contribution => {
         const d = new Date(contribution.date);

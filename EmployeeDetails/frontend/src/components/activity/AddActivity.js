@@ -70,7 +70,7 @@ export default function AddActivity() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ width: "700px", margin: "30px auto" }}>
       <NavDropdowns />
       <form onSubmit={submitForm} style={{ maxWidth: "560px" }}>
         <div style={{ marginBottom: "12px" }}>

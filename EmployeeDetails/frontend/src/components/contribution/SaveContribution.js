@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logger from '../../utils/logger';
 import NavDropdowns from '../NavDropdowns';
@@ -7,9 +7,16 @@ import "./saveContribution.css";
 import {validateContributionForm} from "./contributionValidation";
 
 export default function SaveContribution(){
-  const [form,setForm] = useState({ name:'', email:'',phoneNumber:'', amount:'' });
+  const [form,setForm] = useState({ name:'', email:'',phoneNumber:'', amount:'', activityName:'' });
 const [errors, setErrors] = useState({});
+const [activities, setActivities] = useState([]);
 const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/activities/showActivities')
+      .then(res => setActivities(res.data))
+      .catch(err => logger.error('Error fetching activities:', err));
+  }, []);
   const submitForm = async (e) => {
     e.preventDefault();
     logger.info('Submitting contribution form:', form);
@@ -92,6 +99,22 @@ const navigate = useNavigate();
           />
           {errors.amount && (
             <p className="error-text">{errors.amount}</p>
+          )}
+        </div>
+
+        <div>
+          <select
+            className="form-input"
+            value={form.activityName}
+            onChange={(e) => setForm({ ...form, activityName: e.target.value })}
+          >
+            <option value="">-- Select Activity --</option>
+            {activities.map((a) => (
+              <option key={a.id} value={a.activityName}>{a.activityName}</option>
+            ))}
+          </select>
+          {errors.activityName && (
+            <p className="error-text">{errors.activityName}</p>
           )}
         </div>
 

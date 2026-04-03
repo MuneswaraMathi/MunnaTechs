@@ -13,17 +13,13 @@ public class Address {
     
     private String firstName;
     private String lastName;
-
+    private String fatherName;
     private String houseNumber;
     private String streetName;
     private String landMark;
-
     private String city;
-    private String state;
-    private String postalCode;
-
-    private String mobileNumber;
     private String email;
+
 
     private Date date;
     private Date modifiedDte;
@@ -32,24 +28,19 @@ public class Address {
     // Constructors
     public Address() {}
 
-    public Address(String firstName, String lastName, String houseNumber, String streetName, String landMark,
-            String city, String state, String postalCode, String mobileNumber, String email, Date date,
+    public Address(String firstName, String lastName, String fatherName, String houseNumber, String streetName, String landMark,String city,String email,Date date,
             Date modifiedDte) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fatherName = fatherName;
         this.houseNumber = houseNumber;
         this.streetName = streetName;
         this.landMark = landMark;
         this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.mobileNumber = mobileNumber;
         this.email = email;
         this.date = date;
         this.modifiedDte = modifiedDte;
     }
-
-
 
     // Getters and Setters
     public Long getId() {
@@ -60,12 +51,8 @@ public class Address {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public String getFatherName() {
+        return fatherName;
     }
 
     public void setDate(Date date) {
@@ -96,20 +83,8 @@ public class Address {
         this.landMark = landMark;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName ;
     }
 
     public void setModifiedDte(Date modifiedDte) {
@@ -140,21 +115,20 @@ public class Address {
         return city;
     }
 
-    public String getState() {
-        return state;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public String getEmail() {
+        return email;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getModifiedDte() {
         return modifiedDte;
     }
 
-    
 }

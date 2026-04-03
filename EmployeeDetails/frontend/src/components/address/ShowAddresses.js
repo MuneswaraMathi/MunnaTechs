@@ -116,13 +116,8 @@ export default function ShowAddresses() {
                   Name: {addr.firstName} {addr.lastName}
                 </strong>
               </div>
+              <div>Father's Name: {addr.fatherName}</div>
               <div>H.No: {addr.houseNumber}</div>
-              <div>Street: {addr.streetName}</div>
-              <div>LandMark: {addr.landMark}</div>
-              <div>
-                City: {addr.city}, {addr.state} {addr.postalCode}
-              </div>
-              <div>📞 {addr.mobileNumber}</div>
               <div>✉️ {addr.email}</div>
 
               <div className="address-actions">

@@ -76,7 +76,7 @@ export default function ShowActivities() {
   if (error) return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+    <div style={{ width: "700px", margin: "30px auto" }}>
       <NavDropdowns />
       {activities.length === 0 ? (
         <p>No activities found.</p>

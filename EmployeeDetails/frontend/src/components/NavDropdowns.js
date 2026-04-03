@@ -18,7 +18,8 @@ const NAV_ITEMS = [
     title: "Contributions",
     items: [
       { label: "Add Contribution", to: "/contributions/saveContribution" },
-      { label: "View Contributions", to: "/contributions/showContributions" }
+      { label: "View Contributions", to: "/contributions/showContributions" },
+      { label: "Funds by Activity", to: "/contributions/fundsReport" }
     ]
   },
   {
@@ -46,6 +47,14 @@ export default function NavDropdowns() {
         ...section,
         items: section.items.filter(
           (item) => item.label !== "Add Activity" || email === ADMIN_EMAIL
+        ),
+      };
+    }
+    if (section.title === "Contributions") {
+      return {
+        ...section,
+        items: section.items.filter(
+          (item) => item.label !== "Funds by Activity" || email === ADMIN_EMAIL
         ),
       };
     }

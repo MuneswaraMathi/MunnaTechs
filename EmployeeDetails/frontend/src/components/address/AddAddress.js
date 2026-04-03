@@ -8,7 +8,7 @@ import {validateAddressForm} from "./addressValidation";
 
 
 export default function AddAddress() {
-const [form,setForm] = useState({firstName:'',lastName:'',houseNumber:'',streetName:'',landMark:'',city:'',state:'',postalCode:'',mobileNumber:'',email:''});
+const [form,setForm] = useState({firstName:'',lastName:'',fatherName:'',houseNumber:'',email:''});
 const [errors, setErrors] = useState({});
 const navigate = useNavigate();
 
@@ -24,12 +24,17 @@ const submitForm = async(e)=>{
     const res = await axios.post('http://localhost:8080/address/addAddress',form)
 
     logger.info('firstName: ',form.firstName);
-    logger.info('firstName: ',form.lastName);
-    logger.info('firstName: ',form.email);
-    
+    logger.info('lastName: ',form.lastName);
+    logger.info('fatherName: ',form.fatherName);
+    logger.info('houseNumber: ',form.houseNumber);
+    logger.info('streetName: ',form.streetName);
+    logger.info('landMark: ',form.landMark);
+    logger.info('city: ',form.city);
+    logger.info('email: ',form.email);
+    logger.info('Address added successfully:', res.data);
     localStorage.setItem('firstName',res.data.firstName);
     localStorage.setItem('lastName',res.data.lastName);
-    localStorage.setItem('email',res.data.email);
+    localStorage.setItem('fatherName',res.data.fatherName);
      navigate('/address/getAddress');
     }catch (err) {
       logger.error('Registration failed:', err);
