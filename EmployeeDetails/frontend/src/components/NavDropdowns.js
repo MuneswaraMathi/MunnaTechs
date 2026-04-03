@@ -20,20 +20,42 @@ const NAV_ITEMS = [
       { label: "Add Contribution", to: "/contributions/saveContribution" },
       { label: "View Contributions", to: "/contributions/showContributions" }
     ]
+  },
+  {
+    title: "Activities",
+    items: [
+      { label: "Add Activity", to: "/activities/addActivity" },
+      { label: "Show Activities", to: "/activities/showActivities" }
+    ]
   }
 ];
 
+const ADMIN_EMAIL = "mrao.mathi@gmail.com";
+
 export default function NavDropdowns() {
   const [openTitle, setOpenTitle] = useState(null);
+  const email = localStorage.getItem("email");
 
   const handleToggle = (title) => {
     setOpenTitle((prev) => (prev === title ? null : title));
   };
 
+  const navItems = NAV_ITEMS.map((section) => {
+    if (section.title === "Activities") {
+      return {
+        ...section,
+        items: section.items.filter(
+          (item) => item.label !== "Add Activity" || email === ADMIN_EMAIL
+        ),
+      };
+    }
+    return section;
+  });
+
   return (
     <div style={{ position: "relative" }}>
       <div style={{ display: "flex", gap: "20px", marginBottom: "20px", alignItems: "center" }}>
-        {NAV_ITEMS.map(({ title, items }) => (
+        {navItems.map(({ title, items }) => (
           <Dropdown
             key={title}
             title={title}

@@ -19,6 +19,16 @@
   font-size: 16px;
 }
 
+.month-header {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+}
+
 .loading-text {
   font-size: 18px;
 }
