@@ -17,13 +17,6 @@ export const validateAddressForm = (form) => {
   if (!form.houseNumber.trim()) {
     errors.houseNumber = "House Number is required";
   }
-
-  if (!form.streetName.trim()) {
-    errors.streetName = "Street Name is required";
-  }else if(!/^(?=.{2,}$)[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/.test(form.streetName.trim())) {
-      errors.streetName = "Street Name must contain only letters (min 2)";
-    }
-
   if (!form.fatherName.trim()) {
     errors.fatherName = "Father Name is required";
   }else if(!/^(?=.{2,}$)[A-Za-z]+(?: [A-Za-z]+)*$/.test(form.fatherName.trim())) {
