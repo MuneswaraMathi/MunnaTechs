@@ -43,6 +43,9 @@ public class ActivityController {
     @GetMapping("/showActivity/{id}")
     public ResponseEntity<?> getActivityById(@PathVariable Long id) {
         logger.debug("Fetching activity with ID: {}", id);
+        if (id == null) {
+            return ResponseEntity.status(400).body(Map.of("error", "Activity ID cannot be null"));
+        }
         Activity activity = service.getActivityById(id);
         if (activity == null) {
             logger.warn("Activity not found with ID: {}", id);
@@ -54,6 +57,9 @@ public class ActivityController {
     @PutMapping("/updateActivity/{id}")
     public ResponseEntity<?> updateActivity(@PathVariable Long id, @RequestBody Activity activity) {
         logger.info("Updating activity with ID: {}", id);
+        if (id == null) {
+            return ResponseEntity.status(400).body(Map.of("error", "Activity ID cannot be null"));
+        }
         Activity existing = service.getActivityById(id);
         if (existing == null) {
             return ResponseEntity.status(404).body(Map.of("error", "Activity not found"));
@@ -71,6 +77,9 @@ public class ActivityController {
     @DeleteMapping("/deleteActivity/{id}")
     public ResponseEntity<?> deleteActivity(@PathVariable Long id) {
         logger.info("Deleting activity with ID: {}", id);
+        if (id == null) {
+            return ResponseEntity.status(400).body(Map.of("error", "Activity ID cannot be null"));
+        }
         service.deleteActivity(id);
         return ResponseEntity.ok(Map.of("message", "Activity deleted successfully"));
     }

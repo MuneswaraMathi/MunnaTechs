@@ -8,13 +8,20 @@ function Dropdown({ title, items, isOpen, onToggle, onOpen, onClose }) {
         style={{
           backgroundColor: "rgba(255,255,255,0.8)",
           border: "1px solid #ccc",
-          padding: "8px 30px",
+          padding: "10px 20px",
           borderRadius: "4px",
           cursor: "pointer",
-          color: "#007bff"
+          color: "#007bff",
+          whiteSpace: "nowrap",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "6px",
+          minWidth: "130px",
+          justifyContent: "center",
+          fontSize: "14px"
         }}
       >
-        {title} ⌄
+        {title} <span style={{ fontSize: "12px" }}>&#9662;</span>
       </button>
 
       {isOpen && (

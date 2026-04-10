@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.address.AddressResponse;
-import com.example.auth.UserService;
-
 @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/personalDetails")
@@ -59,6 +56,9 @@ try {
             @PathVariable Long id,
             @RequestBody PersonalInfo personalInfo) {
 
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
         PersonalInfoResponse updated = service.updatePersonalIfo(id, personalInfo);
         return ResponseEntity.ok(updated);
     }

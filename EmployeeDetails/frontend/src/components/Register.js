@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logger from "../utils/logger";
+import API_BASE_URL from "../config/apiConfig";
 import "./register.css";
 import {validateRegisterForm} from "./register-validate";
 
@@ -23,13 +24,26 @@ export default function Register() {
   return Object.keys(newErrors).length === 0;
    };
 
+  const handleBlur = (field) => {
+    const validationErrors = validateRegisterForm(form);
+    setErrors((prev) => {
+      const updated = { ...prev };
+      if (validationErrors[field]) {
+        updated[field] = validationErrors[field];
+      } else {
+        delete updated[field];
+      }
+      return updated;
+    });
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
     try {
-      const res = await axios.post("http://localhost:8080/auth/register", form);
+      const res = await axios.post(`${API_BASE_URL}/auth/register`, form);
       localStorage.setItem("firstName", form.firstName);
       localStorage.setItem("lastName", form.lastName);
       localStorage.setItem("email", form.email);
@@ -53,6 +67,7 @@ export default function Register() {
               placeholder="First Name"
               value={form.firstName}
               onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+              onBlur={() => handleBlur('firstName')}
             />
             {errors.firstName && (
               <p style={{ color: "red", fontSize: "14px" }}>
@@ -67,6 +82,7 @@ export default function Register() {
               placeholder="Last Name"
               value={form.lastName}
               onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+              onBlur={() => handleBlur('lastName')}
             />
             {errors.lastName && (
               <p style={{ color: "red", fontSize: "14px" }}>
@@ -84,6 +100,7 @@ export default function Register() {
                 setForm({ ...form, email: e.target.value });
                 setErrors({ ...errors, email: "" });
               }}
+              onBlur={() => handleBlur('email')}
             />
             {errors.email && (
               <p style={{ color: "red", fontSize: "14px" }}>
@@ -99,6 +116,7 @@ export default function Register() {
               placeholder="Password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
+              onBlur={() => handleBlur('password')}
             />
             {errors.password && (
               <p style={{ color: "red", fontSize: "14px" }}>
@@ -114,6 +132,7 @@ export default function Register() {
               placeholder="Confirm Password"
               value={form.confirmPassword}
               onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
+              onBlur={() => handleBlur('confirmPassword')}
             />
             {errors.confirmPassword && (
               <p style={{ color: "red", fontSize: "14px" }}>
@@ -130,6 +149,7 @@ export default function Register() {
               onChange={(e) =>
                 setForm({ ...form, phoneNumber: e.target.value })
               }
+              onBlur={() => handleBlur('phoneNumber')}
             />
             {errors.phoneNumber && (
               <p style={{ color: "red", fontSize: "14px" }}>

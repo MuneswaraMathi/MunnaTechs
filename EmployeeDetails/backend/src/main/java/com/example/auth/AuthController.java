@@ -91,6 +91,19 @@ public class AuthController {
         return ResponseEntity.ok("home page redirection successfully");
     }
 
+    @PostMapping("/update-password")
+    public ResponseEntity<?> updatePassword(@RequestBody UpdatePasswordRequest request) {
+        String requestEmail = request != null ? request.getEmail() : null;
+        logger.info("Update password request for email: {}", requestEmail);
+        try {
+            service.updatePassword(request);
+            return ResponseEntity.ok(Map.of("message", "Password updated successfully"));
+        } catch (RuntimeException e) {
+            logger.warn("Password update failed for email {}: {}", requestEmail, e.getMessage());
+            return ResponseEntity.status(400).body(Map.of("error", e.getMessage()));
+        }
+    }
+
     @GetMapping
     public ResponseEntity<?> info() {
         return ResponseEntity.ok(Map.of("message", "Auth API - Use POST /auth/register or POST /auth/login"));

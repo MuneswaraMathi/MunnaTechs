@@ -5,6 +5,7 @@ import AboutUs from './components/AboutUs';
 import Services from './components/Services';
 import Register from './components/Register';
 import Login from './components/Login';
+import UpdatePassword from './components/UpdatePassword';
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
@@ -15,6 +16,8 @@ import ShowContributions from './components/contribution/ShowContributions';
 import ShowPersonalInfo from './components/personalInfo/ShowPersonalInfo';
 import AddActivity from './components/activity/AddActivity';
 import ShowActivities from './components/activity/ShowActivities';
+import AddEvent from './components/event/AddEvent';
+import ShowEvents from './components/event/ShowEvents';
 import FundsReport from './components/contribution/FundsReport';
 
 function RequireAuth({ children }) {
@@ -25,11 +28,11 @@ function RequireAuth({ children }) {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/village/potumeraka">
       <div style={{maxWidth:600, margin:'40px auto', fontFamily:'Arial, sans-serif'}}>
         <nav>
           <Link 
-            to="/home" 
+            to="/" 
             style={{ 
               marginRight: '20px', 
               textDecoration: 'none', 
@@ -40,11 +43,12 @@ function App() {
         </nav>
         
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/update-password" element={<UpdatePassword />} />
           <Route path='/personalDetails/showPersonalInfo' element={<ShowPersonalInfo/>}/>
           <Route
             path='/address/addAddress'
@@ -76,6 +80,8 @@ function App() {
           <Route path="/contributions/saveContribution" element={<SaveContribution />} />
           <Route path="/activities/addActivity" element={<RequireAuth><AddActivity /></RequireAuth>} />
           <Route path="/activities/showActivities" element={<RequireAuth><ShowActivities /></RequireAuth>} />
+          <Route path="/events/addEvent" element={<RequireAuth><AddEvent /></RequireAuth>} />
+          <Route path="/events/showEvents" element={<RequireAuth><ShowEvents /></RequireAuth>} />
           <Route path="/contributions/fundsReport" element={<RequireAuth><FundsReport /></RequireAuth>} />
         </Routes>
       </div>

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logger from '../../utils/logger';
-import NavDropdowns from '../NavDropdowns';
+import logger from "../../utils/logger";
+import NavDropdowns from "../NavDropdowns";
+import API_BASE_URL from '../../config/apiConfig';
 import "./saveContribution.css";
 import {validateContributionForm} from "./contributionValidation";
 
@@ -12,8 +13,21 @@ const [errors, setErrors] = useState({});
 const [activities, setActivities] = useState([]);
 const navigate = useNavigate();
 
+  const handleBlur = (field) => {
+    const validationErrors = validateContributionForm(form);
+    setErrors((prev) => {
+      const updated = { ...prev };
+      if (validationErrors[field]) {
+        updated[field] = validationErrors[field];
+      } else {
+        delete updated[field];
+      }
+      return updated;
+    });
+  };
+
   useEffect(() => {
-    axios.get('http://localhost:8080/activities/showActivities')
+    axios.get(`${API_BASE_URL}/activities/showActivities`)
       .then(res => setActivities(res.data))
       .catch(err => logger.error('Error fetching activities:', err));
   }, []);
@@ -26,7 +40,7 @@ const navigate = useNavigate();
       return;
     }
     try {
-      const resp = await axios.post('http://localhost:8080/contributions/saveContribution', form);
+      const resp = await axios.post(`${API_BASE_URL}/contributions/saveContribution`, form);
       logger.info('Contribution saved successfully:', resp.data);
       logger.debug('Amount saved:', resp.data.amount);
       navigate('/contributions/showContributions');
@@ -51,6 +65,7 @@ const navigate = useNavigate();
             onChange={(e) =>
               setForm({ ...form, name: e.target.value })
             }
+            onBlur={() => handleBlur('name')}
           />
           {errors.name && (
             <p className="error-text">{errors.name}</p>
@@ -65,6 +80,7 @@ const navigate = useNavigate();
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })
             }
+            onBlur={() => handleBlur('email')}
           />
           {errors.email && (
             <p className="error-text">{errors.email}</p>
@@ -79,6 +95,7 @@ const navigate = useNavigate();
             onChange={(e) =>
               setForm({ ...form, phoneNumber: e.target.value })
             }
+            onBlur={() => handleBlur('phoneNumber')}
           />
           {errors.phoneNumber && (
             <p className="error-text">
@@ -96,6 +113,7 @@ const navigate = useNavigate();
             onChange={(e) =>
               setForm({ ...form, amount: e.target.value })
             }
+            onBlur={() => handleBlur('amount')}
           />
           {errors.amount && (
             <p className="error-text">{errors.amount}</p>
@@ -107,6 +125,7 @@ const navigate = useNavigate();
             className="form-input"
             value={form.activityName}
             onChange={(e) => setForm({ ...form, activityName: e.target.value })}
+            onBlur={() => handleBlur('activityName')}
           >
             <option value="">-- Select Activity --</option>
             {activities.map((a) => (

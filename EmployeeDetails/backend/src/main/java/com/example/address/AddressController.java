@@ -66,6 +66,10 @@ private static final Logger logger = LoggerFactory.getLogger(AddressController.c
     @GetMapping("/fetchAddress/{id}")
     public ResponseEntity<?> getAddressById(@PathVariable Long id) {
         logger.debug("Fetching address with ID: {}", id);
+        if (id == null) {
+            logger.warn("Address ID is null");
+            return ResponseEntity.status(400).body(Map.of("error", "Address ID cannot be null"));
+        }
         Address address = service.getAddressById(id);
         if (address == null) {
             logger.warn("Address not found with ID: {}", id);
@@ -108,6 +112,10 @@ private static final Logger logger = LoggerFactory.getLogger(AddressController.c
     @DeleteMapping("/deleteAddress/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable Long id) {
         logger.info("Deleting Address with ID: {}", id);
+        if (id == null) {
+            logger.warn("Address ID is null");
+            return ResponseEntity.status(400).body(Map.of("error", "Address ID cannot be null"));
+        }
         service.deleteAddress(id);
         logger.info("Address deleted successfully with ID: {}", id);
         return ResponseEntity.ok(Map.of("message", "Address deleted successfully"));
@@ -115,9 +123,14 @@ private static final Logger logger = LoggerFactory.getLogger(AddressController.c
 
 
     @PutMapping("/updateAddress/{id}")
-    public ResponseEntity<AddressResponse> updateAddress(
+    public ResponseEntity<?> updateAddress(
             @PathVariable Long id,
             @RequestBody Address address) {
+        
+        if (id == null) {
+            logger.warn("Address ID is null");
+            return ResponseEntity.status(400).body(Map.of("error", "Address ID cannot be null"));
+        }
 
         AddressResponse updated = service.updateAddress(id, address);
         return ResponseEntity.ok(updated);

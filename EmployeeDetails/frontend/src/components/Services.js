@@ -9,13 +9,15 @@ export default function Services() {
         position: "fixed",
         top: 0,
         left: 0,
-        backgroundImage: "url('/images/village3.jpg')",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
+        paddingTop: "70px",
       }}
     >
       <div
@@ -37,7 +39,7 @@ export default function Services() {
           <li>School and community facility maintenance activities</li>
           <li>Clean water and sanitation development activities</li>
         </ul>
-        <Link to="/home" style={{ color: "#007bff", textDecoration: "none" }}>
+        <Link to="/" style={{ color: "#007bff", textDecoration: "none" }}>
           Back to Home
         </Link>
       </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logger from "../../utils/logger";
 import NavDropdowns from "../NavDropdowns";
+import API_BASE_URL from "../../config/apiConfig";
 import "./address.css";
 import {validateAddressForm} from "./addressValidation";
 
@@ -11,6 +12,19 @@ export default function AddAddress() {
 const [form,setForm] = useState({firstName:'',lastName:'',fatherName:'',houseNumber:'',email:''});
 const [errors, setErrors] = useState({});
 const navigate = useNavigate();
+
+const handleBlur = (field) => {
+  const validationErrors = validateAddressForm(form);
+  setErrors((prev) => {
+    const updated = { ...prev };
+    if (validationErrors[field]) {
+      updated[field] = validationErrors[field];
+    } else {
+      delete updated[field];
+    }
+    return updated;
+  });
+};
 
 const submitForm = async(e)=>{
     e.preventDefault();
@@ -21,7 +35,7 @@ const submitForm = async(e)=>{
     }
 
     try {
-    const res = await axios.post('http://localhost:8080/address/addAddress',form)
+    const res = await axios.post(`${API_BASE_URL}/address/addAddress`,form)
 
     logger.info('firstName: ',form.firstName);
     logger.info('lastName: ',form.lastName);
@@ -56,6 +70,7 @@ return(
               onChange={(e) =>
                 setForm({ ...form, [field]: e.target.value })
               }
+              onBlur={() => handleBlur(field)}
             />
             {errors[field] && (
               <p className="error-text">{errors[field]}</p>

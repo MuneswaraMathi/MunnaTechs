@@ -28,6 +28,13 @@ const NAV_ITEMS = [
       { label: "Add Activity", to: "/activities/addActivity" },
       { label: "Show Activities", to: "/activities/showActivities" }
     ]
+  },
+  {
+    title: "Events",
+    items: [
+      { label: "Add Event", to: "/events/addEvent" },
+      { label: "Show Events", to: "/events/showEvents" }
+    ]
   }
 ];
 
@@ -36,6 +43,7 @@ const ADMIN_EMAIL = "mrao.mathi@gmail.com";
 export default function NavDropdowns() {
   const [openTitle, setOpenTitle] = useState(null);
   const email = localStorage.getItem("email");
+  const isAdmin = email === ADMIN_EMAIL;
 
   const handleToggle = (title) => {
     setOpenTitle((prev) => (prev === title ? null : title));
@@ -46,7 +54,7 @@ export default function NavDropdowns() {
       return {
         ...section,
         items: section.items.filter(
-          (item) => item.label !== "Add Activity" || email === ADMIN_EMAIL
+          (item) => item.label !== "Add Activity" || isAdmin
         ),
       };
     }
@@ -54,7 +62,15 @@ export default function NavDropdowns() {
       return {
         ...section,
         items: section.items.filter(
-          (item) => item.label !== "Funds by Activity" || email === ADMIN_EMAIL
+          (item) => !["Add Contribution", "Funds by Activity"].includes(item.label) || isAdmin
+        ),
+      };
+    }
+    if (section.title === "Events") {
+      return {
+        ...section,
+        items: section.items.filter(
+          (item) => item.label !== "Add Event" || isAdmin
         ),
       };
     }
@@ -63,7 +79,7 @@ export default function NavDropdowns() {
 
   return (
     <div style={{ position: "relative" }}>
-      <div style={{ display: "flex", gap: "20px", marginBottom: "20px", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: "20px", marginBottom: "80px", alignItems: "center" }}>
         {navItems.map(({ title, items }) => (
           <Dropdown
             key={title}

@@ -8,8 +8,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.address.AddressResponse;
-
 @Service
 public class PersonalInfoService {
 
@@ -34,7 +32,7 @@ public class PersonalInfoService {
 
 
     @Transactional
-    public PersonalInfoResponse updatePersonalIfo(Long id, PersonalInfo personalDetails) {
+    public PersonalInfoResponse updatePersonalIfo(@NonNull Long id, PersonalInfo personalDetails) {
         PersonalInfoResponse response = new PersonalInfoResponse();
          Optional<PersonalInfo> personalInfo = repository.findById(id);
         if(null!=personalInfo && personalInfo.isPresent()){

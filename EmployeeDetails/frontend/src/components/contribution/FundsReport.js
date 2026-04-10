@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavDropdowns from "../NavDropdowns";
+import API_BASE_URL from "../../config/apiConfig";
 import "./showContribution.css";
 
 const ADMIN_EMAIL = "mrao.mathi@gmail.com";
@@ -19,9 +20,9 @@ export default function FundsReport() {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8080/contributions/totalFundsByActivity"),
-      axios.get("http://localhost:8080/activities/showActivities"),
-      axios.get("http://localhost:8080/contributions/showContributions"),
+      axios.get(`${API_BASE_URL}/contributions/totalFundsByActivity`),
+      axios.get(`${API_BASE_URL}/activities/showActivities`),
+      axios.get(`${API_BASE_URL}/contributions/showContributions`),
     ])
       .then(([fundsRes, activitiesRes, contribRes]) => {
         setFunds(fundsRes.data);

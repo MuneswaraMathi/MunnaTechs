@@ -26,6 +26,7 @@ export default function ShowContributions() {
         return {
           id: contribution.id,
           name: contribution.name,
+          contributionName: contribution.activityName || contribution.contributionName || 'N/A',
           amount: contribution.amount,
           email: contribution.email,
           phoneNumber: contribution.phoneNumber,
@@ -64,6 +65,7 @@ export default function ShowContributions() {
             {grouped[key].items.map((contribution) => (
               <div key={contribution.id} className="contribution-card">
                 <div><strong>Name:</strong> {contribution.name}</div>
+                <div><strong>Activity Name:</strong> {contribution.contributionName}</div>
                 <div><strong>Amount:</strong> {contribution.amount}</div>
                 <div><strong>Email:</strong> {contribution.email}</div>
                 <div><strong>Phone:</strong> {contribution.phoneNumber}</div>

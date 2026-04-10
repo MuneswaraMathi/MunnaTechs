@@ -62,6 +62,10 @@ public class ContributionController {
     @GetMapping("/showContribution/{id}")
     public ResponseEntity<?> getContributionById(@PathVariable Long id) {
         logger.debug("Fetching contribution with ID: {}", id);
+        if (id == null) {
+            logger.warn("Contribution ID is null");
+            return ResponseEntity.status(400).body(Map.of("error", "Contribution ID cannot be null"));
+        }
         Contribution contribution = service.getContributionById(id);
         if (contribution == null) {
             logger.warn("Contribution not found with ID: {}", id);
@@ -82,6 +86,10 @@ public class ContributionController {
     @DeleteMapping("/deleteContribution/{id}")
     public ResponseEntity<?> deleteContribution(@PathVariable Long id) {
         logger.info("Deleting contribution with ID: {}", id);
+        if (id == null) {
+            logger.warn("Contribution ID is null");
+            return ResponseEntity.status(400).body(Map.of("error", "Contribution ID cannot be null"));
+        }
         service.deleteContribution(id);
         logger.info("Contribution deleted successfully with ID: {}", id);
         return ResponseEntity.ok(Map.of("message", "Contribution deleted successfully"));

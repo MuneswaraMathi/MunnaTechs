@@ -36,6 +36,41 @@ public class UserService {
         return null;
     }
 
+    public void updatePassword(UpdatePasswordRequest request) {
+        if (request == null || isBlank(request.getEmail()) || isBlank(request.getCurrentPassword())
+                || isBlank(request.getNewPassword()) || isBlank(request.getConfirmPassword())) {
+            throw new RuntimeException("All fields are required");
+        }
+
+        if (request.getNewPassword().length() < 8) {
+            throw new RuntimeException("New password must be at least 8 characters");
+        }
+
+        if (!request.getNewPassword().equals(request.getConfirmPassword())) {
+            throw new RuntimeException("New password and confirm password do not match");
+        }
+
+        Optional<User> userOpt = repo.findByEmail(request.getEmail().trim());
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("Email not registered");
+        }
+
+        User user = userOpt.get();
+        if (!encoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new RuntimeException("Current password is incorrect");
+        }
+
+        if (encoder.matches(request.getNewPassword(), user.getPassword())) {
+            throw new RuntimeException("New password must be different from current password");
+        }
+
+        user.setPassword(encoder.encode(request.getNewPassword()));
+        repo.save(user);
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 
     public List<User> usersList() {
         List<User> users = repo.findAll();

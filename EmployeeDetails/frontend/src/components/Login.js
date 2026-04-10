@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logger from '../utils/logger';
+import API_BASE_URL from "../config/apiConfig";
 import { getPersonalInfoByEmail } from './personalInfo/editPersonalInfo';
 export default function Login(){
   const [form,setForm] = useState({ email:'', password:'' });
@@ -9,7 +10,7 @@ const navigate = useNavigate();
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/auth/login', form);
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, form);
       localStorage.setItem('token', res.data.token);
 
       const personalInfo = await getPersonalInfoByEmail(form.email);
@@ -87,7 +88,11 @@ const navigate = useNavigate();
       <p className="login-text">
          don't have an account?{" "}
           <Link to="/register" className="login-link">
-            Register here
+            Register
+          </Link>
+          {" | "}
+          <Link to="/update-password" className="login-link">
+            Update Password
           </Link>
         </p>
       </div>

@@ -1,7 +1,8 @@
 
-import axios from "axios";
+import axios from 'axios';
+import API_BASE_URL from '../../config/apiConfig';
 
-const BASE_URL = "http://localhost:8080/address";
+const BASE_URL = `${API_BASE_URL}/address`;
 
 export const getAddressesByEmail = async (email) => {
   const res = await axios.get(`${BASE_URL}/getAddress/${email}`);

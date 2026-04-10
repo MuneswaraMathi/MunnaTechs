@@ -64,7 +64,7 @@ public class AddressService {
     }
 
     @Transactional
-    public AddressResponse updateAddress(Long id, Address updatedAddress) {
+    public AddressResponse updateAddress(@NonNull Long id, Address updatedAddress) {
         AddressResponse response = new AddressResponse();
          Optional<Address> address = repository.findById(id);
         if(null!=address && address.isPresent()){
