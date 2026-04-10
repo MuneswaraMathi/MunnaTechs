@@ -50,7 +50,7 @@ export default function FundsReport() {
     <div className="contributions-container">
       <NavDropdowns />
 
-      {isAdmin && (
+      {(
         <div style={{ display: "flex", borderBottom: "2px solid #007bff", marginBottom: "16px" }}>
           <button
             onClick={() => setActiveTab("fundsActivity")}
@@ -70,7 +70,7 @@ export default function FundsReport() {
         </div>
       )}
 
-      {isAdmin && activeTab === "fundsActivity" ? (
+      {activeTab === "fundsActivity" ? (
         <>
           <div className="month-header" style={{ marginTop: 0 }}>
             Total Funds Collected by Activity

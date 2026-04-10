@@ -62,7 +62,7 @@ export default function NavDropdowns() {
       return {
         ...section,
         items: section.items.filter(
-          (item) => !["Add Contribution", "Funds by Activity"].includes(item.label) || isAdmin
+          (item) => !["Add Contribution"].includes(item.label) || isAdmin
         ),
       };
     }
