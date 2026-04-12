@@ -31,6 +31,20 @@ public class ContributionService {
         return repository.findById(id).orElse(null);
     }
 
+    public Contribution updateContribution(@NonNull Long id, Contribution contribution) {
+        Contribution existing = repository.findById(id).orElse(null);
+        if (existing == null) {
+            return null;
+        }
+        existing.setName(contribution.getName());
+        existing.setEmail(contribution.getEmail());
+        existing.setPhoneNumber(contribution.getPhoneNumber());
+        existing.setActivityName(contribution.getActivityName());
+        existing.setDate(contribution.getDate());
+        existing.setAmount(contribution.getAmount());
+        return repository.save(existing);
+    }
+
     public void deleteContribution(@NonNull Long id) {
         repository.deleteById(id);
     }

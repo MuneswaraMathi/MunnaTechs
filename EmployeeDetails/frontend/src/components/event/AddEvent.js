@@ -9,6 +9,7 @@ export default function AddEvent() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     eventName: "",
+    description: "",
     startDate: "",
     endDate: "",
   });
@@ -19,6 +20,10 @@ export default function AddEvent() {
 
     if (!form.eventName.trim()) {
       validationErrors.eventName = "Event Name is required";
+    }
+
+    if (!form.description.trim()) {
+      validationErrors.description = "Description is required";
     }
 
     if (!form.startDate) {
@@ -68,7 +73,23 @@ export default function AddEvent() {
   };
 
   return (
-    <div style={{ width: "700px", margin: "30px auto" }}>
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: '30px 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    }}>
+      <div style={{ width: "700px" }}>
       <NavDropdowns />
       <form onSubmit={submitForm} style={{ maxWidth: "560px" }}>
         <div style={{ marginBottom: "12px" }}>
@@ -80,6 +101,17 @@ export default function AddEvent() {
             style={{ width: "100%", padding: "10px" }}
           />
           {errors.eventName && <p className="error-text">{errors.eventName}</p>}
+        </div>
+
+        <div style={{ marginBottom: "12px" }}>
+          <textarea
+            placeholder="Description"
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            onBlur={() => handleBlur('description')}
+            style={{ width: "100%", padding: "10px", minHeight: "90px" }}
+          />
+          {errors.description && <p className="error-text">{errors.description}</p>}
         </div>
 
         <div style={{ marginBottom: "12px" }}>
@@ -110,6 +142,7 @@ export default function AddEvent() {
           Save Event
         </button>
       </form>
+      </div>
     </div>
   );
 }

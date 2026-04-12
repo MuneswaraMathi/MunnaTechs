@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .requestMatchers("/address/**").permitAll()
                 .requestMatchers("/activities/**").permitAll()
                 .requestMatchers("/events/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/expenses/**").permitAll()
                 .requestMatchers("/error").permitAll()
                 .anyRequest().authenticated()
             )

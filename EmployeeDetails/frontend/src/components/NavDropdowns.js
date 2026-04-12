@@ -35,6 +35,13 @@ const NAV_ITEMS = [
       { label: "Add Event", to: "/events/addEvent" },
       { label: "Show Events", to: "/events/showEvents" }
     ]
+  },
+  {
+    title: "Expenses",
+    items: [
+      { label: "Add Expense", to: "/expenses/addExpense" },
+      { label: "Show Expenses", to: "/expenses/showExpenses" }
+    ]
   }
 ];
 
@@ -71,6 +78,14 @@ export default function NavDropdowns() {
         ...section,
         items: section.items.filter(
           (item) => item.label !== "Add Event" || isAdmin
+        ),
+      };
+    }
+    if (section.title === "Expenses") {
+      return {
+        ...section,
+        items: section.items.filter(
+          (item) => item.label !== "Add Expense" || isAdmin
         ),
       };
     }

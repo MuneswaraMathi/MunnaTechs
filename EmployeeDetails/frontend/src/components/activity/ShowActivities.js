@@ -77,7 +77,23 @@ export default function ShowActivities() {
   if (error) return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
 
   return (
-    <div style={{ width: "700px", margin: "30px auto" }}>
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: '30px 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    }}>
+      <div style={{ width: "700px" }}>
       <NavDropdowns />
       {activities.length === 0 ? (
         <p>No activities found.</p>
@@ -140,6 +156,7 @@ export default function ShowActivities() {
           </div>
         ));
       })()}
+      </div>
     </div>
   );
 }

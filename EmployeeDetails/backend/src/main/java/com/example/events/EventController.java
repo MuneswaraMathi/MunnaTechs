@@ -65,6 +65,7 @@ public class EventController {
             return ResponseEntity.status(404).body(Map.of("error", "Event not found"));
         }
         existing.setEventName(event.getEventName());
+        existing.setDescription(event.getDescription());
         existing.setStartDate(event.getStartDate());
         existing.setEndDate(event.getEndDate());
         Event updated = service.createEvent(existing);

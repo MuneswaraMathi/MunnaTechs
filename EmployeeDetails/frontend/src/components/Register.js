@@ -57,6 +57,23 @@ export default function Register() {
 
   logger.debug("Register component rendered");
   return (
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: '30px 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    }}>
+      <div style={{ width: "700px" }}>
     <div className="register-container">
       <div className="register-card">
         <h2>Register</h2>
@@ -169,6 +186,8 @@ export default function Register() {
             Login here
           </Link>
         </p>
+      </div>
+    </div>
       </div>
     </div>
   );

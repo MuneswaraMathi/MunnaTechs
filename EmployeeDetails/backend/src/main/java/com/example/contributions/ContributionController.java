@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/contributions")
 public class ContributionController {
@@ -81,6 +81,16 @@ public class ContributionController {
         List<Contribution> contributions = service.getContributionsByEmail(email);
         logger.info("Retrieved {} contributions for email: {}", contributions.size(), email);
         return ResponseEntity.ok(contributions);
+    }
+
+    @PutMapping("/updateContribution/{id}")
+    public ResponseEntity<?> updateContribution(@PathVariable Long id, @RequestBody Contribution contribution) {
+        logger.info("Updating contribution with ID: {}", id);
+        Contribution updated = service.updateContribution(id, contribution);
+        if (updated == null) {
+            return ResponseEntity.status(404).body(Map.of("error", "Contribution not found"));
+        }
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/deleteContribution/{id}")

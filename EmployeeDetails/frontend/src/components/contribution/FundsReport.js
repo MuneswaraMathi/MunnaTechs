@@ -47,6 +47,23 @@ export default function FundsReport() {
   if (error) return <p className="error-text">{error}</p>;
 
   return (
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: '30px 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    }}>
+      <div style={{ width: "700px" }}>
     <div className="contributions-container">
       <NavDropdowns />
 
@@ -130,6 +147,8 @@ export default function FundsReport() {
       ) : !isAdmin ? (
         <p className="error-text">You do not have permission to view this page.</p>
       ) : null}
+    </div>
+      </div>
     </div>
   );
 }

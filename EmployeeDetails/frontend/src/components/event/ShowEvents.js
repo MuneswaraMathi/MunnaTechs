@@ -77,7 +77,23 @@ export default function ShowEvents() {
   if (error) return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
 
   return (
-    <div style={{ width: "700px", margin: "30px auto" }}>
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: '30px 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    }}>
+      <div style={{ width: "700px" }}>
       <NavDropdowns />
       {events.length === 0 ? (
         <p>No events found.</p>
@@ -104,17 +120,29 @@ export default function ShowEvents() {
               >
                 {editingId === event.id && isAdmin ? (
                   <>
-                    {["eventName", "startDate", "endDate"].map((field) => (
-                      <input
-                        key={field}
-                        name={field}
-                        value={editForm[field] || ""}
-                        onChange={handleChange}
-                        placeholder={field}
-                        type={field.includes("Date") ? "date" : "text"}
-                        style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd" }}
-                      />
-                    ))}
+                    {["eventName", "description", "startDate", "endDate"].map((field) =>
+                      field === "description" ? (
+                        <textarea
+                          key={field}
+                          name={field}
+                          value={editForm[field] || ""}
+                          onChange={handleChange}
+                          placeholder="Description"
+                          rows={3}
+                          style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd", resize: "vertical" }}
+                        />
+                      ) : (
+                        <input
+                          key={field}
+                          name={field}
+                          value={editForm[field] || ""}
+                          onChange={handleChange}
+                          placeholder={field}
+                          type={field.includes("Date") ? "date" : "text"}
+                          style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd" }}
+                        />
+                      )
+                    )}
                     <div className="address-actions">
                       <button onClick={handleSave} className="btn btn-save">Save</button>
                       <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
@@ -123,6 +151,7 @@ export default function ShowEvents() {
                 ) : (
                   <>
                     <div><strong>Event Name:</strong> {event.eventName}</div>
+                    <div><strong>Description:</strong> {event.description}</div>
                     <div><strong>Start Date:</strong> {event.startDate}</div>
                     <div><strong>End Date:</strong> {event.endDate}</div>
                     {isAdmin && (
@@ -138,6 +167,7 @@ export default function ShowEvents() {
           </div>
         ));
       })()}
+      </div>
     </div>
   );
 }
