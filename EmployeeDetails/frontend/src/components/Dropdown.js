@@ -8,7 +8,7 @@ function Dropdown({ title, items, isOpen, onToggle, onOpen, onClose }) {
         style={{
           backgroundColor: "rgba(255,255,255,0.8)",
           border: "1px solid #ccc",
-          padding: "10px 20px",
+          padding: "8px 12px",
           borderRadius: "4px",
           cursor: "pointer",
           color: "#007bff",
@@ -16,7 +16,7 @@ function Dropdown({ title, items, isOpen, onToggle, onOpen, onClose }) {
           display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          minWidth: "130px",
+          minWidth: "90px",
           justifyContent: "center",
           fontSize: "14px"
         }}
