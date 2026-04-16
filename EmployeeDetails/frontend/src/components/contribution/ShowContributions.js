@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logger from "../../utils/logger";
+import axios from 'axios';
 import NavDropdowns from "../NavDropdowns";
-import { getContributionsByEmail, updateContributionById, deleteContributionById } from './editContribution';
+import API_BASE_URL from "../../config/apiConfig";
+import { updateContributionById, deleteContributionById } from './editContribution';
 import './showContribution.css';
 import '../address/showAddress.css';
 
 const ADMIN_EMAIL = "mrao.mathi@gmail.com";
 
 export default function ShowContributions() {
-  const navigate = useNavigate();
   const [contributions, setContributions] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -18,28 +19,19 @@ export default function ShowContributions() {
   const isAdmin = localStorage.getItem("email") === ADMIN_EMAIL;
 
   useEffect(() => {
-    fetchContributions();
+    fetchData();
   }, []);
 
-  const fetchContributions = async () => {
+  const fetchData = async () => {
     try {
-      const email = localStorage.getItem('email');
-      logger.info('fetching contributions for email: ', email);
-      const res = await getContributionsByEmail(email);
-      const contributionsData = res.data.map(contribution => {
-        const d = new Date(contribution.date);
-        return {
-          ...contribution,
-          contributionName: contribution.activityName || contribution.contributionName || 'N/A',
-          dateDisplay: d.toLocaleDateString(),
-          monthKey: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
-          monthLabel: d.toLocaleString('default', { month: 'long', year: 'numeric' }),
-        };
-      });
-      setContributions(contributionsData);
+      const [contribRes, activitiesRes] = await Promise.all([
+        axios.get(`${API_BASE_URL}/contributions/showContributions`),
+        axios.get(`${API_BASE_URL}/activities/showActivities`),
+      ]);
+      setContributions(contribRes.data);
+      setActivities(activitiesRes.data);
     } catch (err) {
-      setError('Failed to load contributions');
-      console.error(err);
+      setError("Failed to load contributions");
     } finally {
       setLoading(false);
     }
@@ -58,9 +50,8 @@ export default function ShowContributions() {
     try {
       await updateContributionById(editingId, editForm);
       setEditingId(null);
-      fetchContributions();
+      fetchData();
     } catch (err) {
-      logger.error("Error updating contribution:", err);
       alert("Failed to update contribution");
     }
   };
@@ -69,15 +60,29 @@ export default function ShowContributions() {
     if (!window.confirm("Are you sure you want to delete this contribution?")) return;
     try {
       await deleteContributionById(id);
-      fetchContributions();
+      fetchData();
     } catch (err) {
-      logger.error("Error deleting contribution:", err);
       alert("Failed to delete contribution");
     }
   };
 
   if (loading) return <p className="loading-text">Loading Contributions...</p>;
   if (error) return <p className="error-text">{error}</p>;
+
+  const filteredContributions = selectedActivity
+    ? contributions.filter((c) => c.activityName === selectedActivity)
+    : [];
+
+  const total = filteredContributions.reduce((sum, c) => sum + Number(c.amount), 0);
+
+  const inputStyle = {
+    width: "100%",
+    padding: "4px 6px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
+    fontSize: "13px",
+    boxSizing: "border-box",
+  };
 
   return (
     <div style={{
@@ -96,72 +101,120 @@ export default function ShowContributions() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "700px" }}>
-    <div className="contributions-container">
-      <NavDropdowns />
-      {contributions.length === 0 ? (
-        <p className="loading-text">Contributions Not Found</p>
-      ) : (() => {
-        const grouped = contributions.reduce((acc, c) => {
-          if (!acc[c.monthKey]) acc[c.monthKey] = { label: c.monthLabel, items: [] };
-          acc[c.monthKey].items.push(c);
-          return acc;
-        }, {});
-        const sortedKeys = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
-        return sortedKeys.map((key) => (
-          <div key={key}>
-            <div className="month-header">{grouped[key].label}</div>
-            {grouped[key].items.map((contribution) => (
-              <div key={contribution.id} className="contribution-card">
-                {editingId === contribution.id && isAdmin ? (
-                  <>
-                    {["name", "email", "phoneNumber", "activityName", "amount"].map(
-                      (field) => (
-                        <input
-                          key={field}
-                          name={field}
-                          value={editForm[field] || ""}
-                          onChange={handleChange}
-                          placeholder={field}
-                          type={field === "amount" ? "number" : "text"}
-                          style={{
-                            display: "block",
-                            width: "100%",
-                            marginBottom: "8px",
-                            padding: "6px",
-                            borderRadius: "4px",
-                            border: "1px solid #ddd",
-                          }}
-                        />
-                      )
-                    )}
-                    <div className="address-actions">
-                      <button onClick={handleSave} className="btn btn-save">Save</button>
-                      <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div><strong>Name:</strong> {contribution.name}</div>
-                    <div><strong>Activity Name:</strong> {contribution.contributionName}</div>
-                    <div><strong>Amount:</strong> {contribution.amount}</div>
-                    <div><strong>Email:</strong> {contribution.email}</div>
-                    <div><strong>Phone:</strong> {contribution.phoneNumber}</div>
-                    <div><strong>Date:</strong> {contribution.dateDisplay}</div>
+      <div style={{ width: "750px" }}>
+        <NavDropdowns />
+
+        <div className="month-header" style={{ marginTop: 0 }}>
+          Contributions by Activity
+        </div>
+
+        <select
+          className="input-field"
+          value={selectedActivity}
+          onChange={(e) => setSelectedActivity(e.target.value)}
+          style={{ marginBottom: "16px", width: "100%", padding: "10px", fontSize: "16px", borderRadius: "5px", border: "1px solid #ddd" }}
+        >
+          <option value="">-- Select an Activity --</option>
+          {activities.map((a) => (
+            <option key={a.id} value={a.activityName}>
+              {a.activityName}
+            </option>
+          ))}
+        </select>
+
+        {selectedActivity && (
+          filteredContributions.length === 0 ? (
+            <p style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}>No contributions found for this activity.</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <table style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+              }}>
+                <thead>
+                  <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>S.No</th>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Name</th>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Email</th>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Phone</th>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Date</th>
+                    <th style={{ padding: "10px 12px", textAlign: "right", fontSize: "14px" }}>Amount</th>
                     {isAdmin && (
-                      <div className="address-actions">
-                        <button onClick={() => handleEditClick(contribution)} className="btn btn-edit">Edit</button>
-                        <button onClick={() => handleDelete(contribution.id)} className="btn btn-delete">Delete</button>
-                      </div>
+                      <th style={{ padding: "10px 12px", textAlign: "center", fontSize: "14px" }}>Actions</th>
                     )}
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        ));
-      })()}
-    </div>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredContributions.map((contribution, index) => (
+                    <tr key={contribution.id} style={{
+                      borderBottom: "1px solid #eee",
+                      backgroundColor: index % 2 === 0 ? "#fff" : "#f8f9fa",
+                    }}>
+                      {editingId === contribution.id && isAdmin ? (
+                        <>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                          <td style={{ padding: "8px 12px" }}>
+                            <input name="name" value={editForm.name || ""} onChange={handleChange} style={inputStyle} />
+                          </td>
+                          <td style={{ padding: "8px 12px" }}>
+                            <input name="email" value={editForm.email || ""} onChange={handleChange} style={inputStyle} />
+                          </td>
+                          <td style={{ padding: "8px 12px" }}>
+                            <input name="phoneNumber" value={editForm.phoneNumber || ""} onChange={handleChange} style={inputStyle} />
+                          </td>
+                          <td style={{ padding: "8px 12px" }}>
+                            <input name="date" type="date" value={editForm.date ? editForm.date.substring(0, 10) : ""} onChange={handleChange} style={inputStyle} />
+                          </td>
+                          <td style={{ padding: "8px 12px" }}>
+                            <input name="amount" type="number" value={editForm.amount || ""} onChange={handleChange} style={{ ...inputStyle, textAlign: "right" }} />
+                          </td>
+                          <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                            <button onClick={handleSave} className="btn btn-save" style={{ marginBottom: "4px" }}>Save</button>
+                            <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>{contribution.name}</td>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>{contribution.email}</td>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>{contribution.phoneNumber}</td>
+                          <td style={{ padding: "8px 12px", fontSize: "14px" }}>
+                            {new Date(contribution.date).toLocaleDateString()}
+                          </td>
+                          <td style={{ padding: "8px 12px", fontSize: "14px", textAlign: "right", fontWeight: 600 }}>
+                            {Number(contribution.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                          </td>
+                          {isAdmin && (
+                            <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                              <button onClick={() => handleEditClick(contribution)} className="btn btn-edit">Edit</button>
+                              <button onClick={() => handleDelete(contribution.id)} className="btn btn-delete">Delete</button>
+                            </td>
+                          )}
+                        </>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
+                    <td colSpan={isAdmin ? 6 : 5} style={{ padding: "10px 12px", fontWeight: 700, fontSize: "15px" }}>
+                      Total — {selectedActivity}
+                    </td>
+                    <td style={{ padding: "10px 12px", textAlign: "right", fontWeight: 700, fontSize: "15px" }}>
+                      {total.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                    </td>
+                    {isAdmin && <td></td>}
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          )
+        )}
       </div>
     </div>
   );

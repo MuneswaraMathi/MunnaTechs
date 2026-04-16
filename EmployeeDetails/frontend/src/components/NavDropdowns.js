@@ -15,18 +15,18 @@ const NAV_ITEMS = [
     ]
   },
   {
+    title: "Activities",
+    items: [
+      { label: "Add Activity", to: "/activities/addActivity" },
+      { label: "Show Activities", to: "/activities/showActivities" }
+    ]
+  },
+  {
     title: "Contributions",
     items: [
       { label: "Add Contribution", to: "/contributions/saveContribution" },
       { label: "View Contributions", to: "/contributions/showContributions" },
       { label: "Funds by Activity", to: "/contributions/fundsReport" }
-    ]
-  },
-  {
-    title: "Activities",
-    items: [
-      { label: "Add Activity", to: "/activities/addActivity" },
-      { label: "Show Activities", to: "/activities/showActivities" }
     ]
   },
   {
