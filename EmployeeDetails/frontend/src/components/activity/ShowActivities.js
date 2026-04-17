@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import logger from "../../utils/logger";
 import NavDropdowns from "../NavDropdowns";
- import API_BASE_URL from "../../config/apiConfig";
+import API_BASE_URL from "../../config/apiConfig";
 import { updateActivityById, deleteActivityById } from "./editActivity";
 import "../address/showAddress.css";
 import "../contribution/showContribution.css";
@@ -24,18 +23,8 @@ export default function ShowActivities() {
   const fetchActivities = async () => {
     try {
       const res = await axios.get(`${API_BASE_URL}/activities/showActivities`);
-      const mapped = res.data.map((a) => {
-        const d = new Date(a.startDate);
-        return {
-          ...a,
-          monthKey: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`,
-          monthLabel: d.toLocaleString("default", { month: "long", year: "numeric" }),
-        };
-      });
-      setActivities(mapped);
-      logger.info("Activities fetched:", mapped.length);
+      setActivities(res.data);
     } catch (err) {
-      logger.error("Error fetching activities:", err);
       setError("Failed to load activities");
     } finally {
       setLoading(false);
@@ -57,7 +46,6 @@ export default function ShowActivities() {
       setEditingId(null);
       fetchActivities();
     } catch (err) {
-      logger.error("Error updating activity:", err);
       alert("Failed to update activity");
     }
   };
@@ -68,13 +56,21 @@ export default function ShowActivities() {
       await deleteActivityById(id);
       fetchActivities();
     } catch (err) {
-      logger.error("Error deleting activity:", err);
       alert("Failed to delete activity");
     }
   };
 
   if (loading) return <p style={{ padding: "20px" }}>Loading activities...</p>;
   if (error) return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
+
+  const inputStyle = {
+    width: "100%",
+    padding: "4px 6px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
+    fontSize: "13px",
+    boxSizing: "border-box",
+  };
 
   return (
     <div style={{
@@ -93,69 +89,91 @@ export default function ShowActivities() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "700px" }}>
-      <NavDropdowns />
-      {activities.length === 0 ? (
-        <p>No activities found.</p>
-      ) : (() => {
-        const grouped = activities.reduce((acc, a) => {
-          if (!acc[a.monthKey]) acc[a.monthKey] = { label: a.monthLabel, items: [] };
-          acc[a.monthKey].items.push(a);
-          return acc;
-        }, {});
-        const sortedKeys = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
-        return sortedKeys.map((key) => (
-          <div key={key}>
-            <div className="month-header">{grouped[key].label}</div>
-            {grouped[key].items.map((activity) => (
-              <div
-                key={activity.id}
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "6px",
-                  padding: "12px",
-                  marginBottom: "12px",
-                  backgroundColor: "#f9f9f9",
-                }}
-              >
-                {editingId === activity.id && isAdmin ? (
-                  <>
-                    {["activityName", "description", "estimationCost", "startDate", "endDate"].map((field) => (
-                      <input
-                        key={field}
-                        name={field}
-                        value={editForm[field] || ""}
-                        onChange={handleChange}
-                        placeholder={field}
-                        type={field.includes("Date") ? "date" : field === "estimationCost" ? "number" : "text"}
-                        style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd" }}
-                      />
-                    ))}
-                    <div className="address-actions">
-                      <button onClick={handleSave} className="btn btn-save">💾 Save</button>
-                      <button onClick={() => setEditingId(null)} className="btn btn-cancel">❌ Cancel</button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div><strong>Activity Name:</strong> {activity.activityName}</div>
-                    <div><strong>Description:</strong> {activity.description}</div>
-                    <div><strong>Estimation Cost:</strong> {activity.estimationCost}</div>
-                    <div><strong>Start Date:</strong> {activity.startDate}</div>
-                    <div><strong>End Date:</strong> {activity.endDate}</div>
-                    {isAdmin && (
-                      <div className="address-actions">
-                        <button onClick={() => handleEditClick(activity)} className="btn btn-edit">✏️ Edit</button>
-                        <button onClick={() => handleDelete(activity.id)} className="btn btn-delete">🗑 Delete</button>
-                      </div>
+      <div style={{ width: "950px" }}>
+        <NavDropdowns />
+
+        <div className="month-header" style={{ marginTop: 0 }}>
+          Activities
+        </div>
+
+        {activities.length === 0 ? (
+          <p style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}>No activities found.</p>
+        ) : (
+          <div style={{ overflowX: "auto" }}>
+            <table style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              backgroundColor: "#fff",
+              borderRadius: "8px",
+              overflow: "hidden",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+            }}>
+              <thead>
+                <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>S.No</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Activity Name</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Description</th>
+                  <th style={{ padding: "10px 12px", textAlign: "right", fontSize: "14px" }}>Est. Cost</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Start Date</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>End Date</th>
+                  {isAdmin && (
+                    <th style={{ padding: "10px 12px", textAlign: "center", fontSize: "14px" }}>Actions</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {activities.map((activity, index) => (
+                  <tr key={activity.id} style={{
+                    borderBottom: "1px solid #eee",
+                    backgroundColor: index % 2 === 0 ? "#fff" : "#f8f9fa",
+                  }}>
+                    {editingId === activity.id && isAdmin ? (
+                      <>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="activityName" value={editForm.activityName || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="description" value={editForm.description || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="estimationCost" type="number" value={editForm.estimationCost || ""} onChange={handleChange} style={{ ...inputStyle, textAlign: "right" }} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="startDate" type="date" value={editForm.startDate || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="endDate" type="date" value={editForm.endDate || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                          <button onClick={handleSave} className="btn btn-save" style={{ marginBottom: "4px" }}>Save</button>
+                          <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{activity.activityName}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{activity.description}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px", textAlign: "right", fontWeight: 600 }}>
+                          {Number(activity.estimationCost).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                        </td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{activity.startDate}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{activity.endDate}</td>
+                        {isAdmin && (
+                          <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                            <button onClick={() => handleEditClick(activity)} className="btn btn-edit">Edit</button>
+                            <button onClick={() => handleDelete(activity.id)} className="btn btn-delete">Delete</button>
+                          </td>
+                        )}
+                      </>
                     )}
-                  </>
-                )}
-              </div>
-            ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ));
-      })()}
+        )}
       </div>
     </div>
   );

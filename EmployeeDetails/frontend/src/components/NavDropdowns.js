@@ -25,8 +25,7 @@ const NAV_ITEMS = [
     title: "Contributions",
     items: [
       { label: "Add Contribution", to: "/contributions/saveContribution" },
-      { label: "View Contributions", to: "/contributions/showContributions" },
-      { label: "Funds by Activity", to: "/contributions/fundsReport" }
+      { label: "View Contributions", to: "/contributions/showContributions" }
     ]
   },
   {
@@ -41,6 +40,13 @@ const NAV_ITEMS = [
     items: [
       { label: "Add Expense", to: "/expenses/addExpense" },
       { label: "Show Expenses", to: "/expenses/showExpenses" }
+    ]
+  },
+  {
+    title: "Team",
+    items: [
+      { label: "Add Team", to: "/team/addTeam" },
+      { label: "Show Team", to: "/team/showTeam" }
     ]
   },
   {
@@ -92,6 +98,14 @@ export default function NavDropdowns() {
         ...section,
         items: section.items.filter(
           (item) => item.label !== "Add Expense" || isAdmin
+        ),
+      };
+    }
+    if (section.title === "Team") {
+      return {
+        ...section,
+        items: section.items.filter(
+          (item) => item.label !== "Add Team" || isAdmin
         ),
       };
     }

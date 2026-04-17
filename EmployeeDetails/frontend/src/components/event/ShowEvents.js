@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import logger from "../../utils/logger";
 import NavDropdowns from "../NavDropdowns";
 import API_BASE_URL from "../../config/apiConfig";
 import { updateEventById, deleteEventById } from "./editEvent";
@@ -24,18 +23,8 @@ export default function ShowEvents() {
   const fetchEvents = async () => {
     try {
       const res = await axios.get(`${API_BASE_URL}/events/showEvents`);
-      const mapped = res.data.map((e) => {
-        const d = new Date(e.startDate);
-        return {
-          ...e,
-          monthKey: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`,
-          monthLabel: d.toLocaleString("default", { month: "long", year: "numeric" }),
-        };
-      });
-      setEvents(mapped);
-      logger.info("Events fetched:", mapped.length);
+      setEvents(res.data);
     } catch (err) {
-      logger.error("Error fetching events:", err);
       setError("Failed to load events");
     } finally {
       setLoading(false);
@@ -57,7 +46,6 @@ export default function ShowEvents() {
       setEditingId(null);
       fetchEvents();
     } catch (err) {
-      logger.error("Error updating event:", err);
       alert("Failed to update event");
     }
   };
@@ -68,13 +56,21 @@ export default function ShowEvents() {
       await deleteEventById(id);
       fetchEvents();
     } catch (err) {
-      logger.error("Error deleting event:", err);
       alert("Failed to delete event");
     }
   };
 
   if (loading) return <p style={{ padding: "20px" }}>Loading events...</p>;
   if (error) return <p style={{ padding: "20px", color: "red" }}>{error}</p>;
+
+  const inputStyle = {
+    width: "100%",
+    padding: "4px 6px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
+    fontSize: "13px",
+    boxSizing: "border-box",
+  };
 
   return (
     <div style={{
@@ -93,80 +89,84 @@ export default function ShowEvents() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "700px" }}>
-      <NavDropdowns />
-      {events.length === 0 ? (
-        <p>No events found.</p>
-      ) : (() => {
-        const grouped = events.reduce((acc, e) => {
-          if (!acc[e.monthKey]) acc[e.monthKey] = { label: e.monthLabel, items: [] };
-          acc[e.monthKey].items.push(e);
-          return acc;
-        }, {});
-        const sortedKeys = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
-        return sortedKeys.map((key) => (
-          <div key={key}>
-            <div className="month-header">{grouped[key].label}</div>
-            {grouped[key].items.map((event) => (
-              <div
-                key={event.id}
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "6px",
-                  padding: "12px",
-                  marginBottom: "12px",
-                  backgroundColor: "#f9f9f9",
-                }}
-              >
-                {editingId === event.id && isAdmin ? (
-                  <>
-                    {["eventName", "description", "startDate", "endDate"].map((field) =>
-                      field === "description" ? (
-                        <textarea
-                          key={field}
-                          name={field}
-                          value={editForm[field] || ""}
-                          onChange={handleChange}
-                          placeholder="Description"
-                          rows={3}
-                          style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd", resize: "vertical" }}
-                        />
-                      ) : (
-                        <input
-                          key={field}
-                          name={field}
-                          value={editForm[field] || ""}
-                          onChange={handleChange}
-                          placeholder={field}
-                          type={field.includes("Date") ? "date" : "text"}
-                          style={{ display: "block", width: "100%", marginBottom: "8px", padding: "6px", borderRadius: "4px", border: "1px solid #ddd" }}
-                        />
-                      )
+      <div style={{ width: "950px" }}>
+        <NavDropdowns />
+
+        <div className="month-header" style={{ marginTop: 0 }}>
+          Events
+        </div>
+
+        {events.length === 0 ? (
+          <p style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}>No events found.</p>
+        ) : (
+          <div style={{ overflowX: "auto" }}>
+            <table style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              backgroundColor: "#fff",
+              borderRadius: "8px",
+              overflow: "hidden",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+            }}>
+              <thead>
+                <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>S.No</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Event Name</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Description</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Start Date</th>
+                  <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>End Date</th>
+                  {isAdmin && (
+                    <th style={{ padding: "10px 12px", textAlign: "center", fontSize: "14px" }}>Actions</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {events.map((event, index) => (
+                  <tr key={event.id} style={{
+                    borderBottom: "1px solid #eee",
+                    backgroundColor: index % 2 === 0 ? "#fff" : "#f8f9fa",
+                  }}>
+                    {editingId === event.id && isAdmin ? (
+                      <>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="eventName" value={editForm.eventName || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="description" value={editForm.description || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="startDate" type="date" value={editForm.startDate || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px" }}>
+                          <input name="endDate" type="date" value={editForm.endDate || ""} onChange={handleChange} style={inputStyle} />
+                        </td>
+                        <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                          <button onClick={handleSave} className="btn btn-save" style={{ marginBottom: "4px" }}>Save</button>
+                          <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{index + 1}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{event.eventName}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{event.description}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{event.startDate}</td>
+                        <td style={{ padding: "8px 12px", fontSize: "14px" }}>{event.endDate}</td>
+                        {isAdmin && (
+                          <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
+                            <button onClick={() => handleEditClick(event)} className="btn btn-edit">Edit</button>
+                            <button onClick={() => handleDelete(event.id)} className="btn btn-delete">Delete</button>
+                          </td>
+                        )}
+                      </>
                     )}
-                    <div className="address-actions">
-                      <button onClick={handleSave} className="btn btn-save">Save</button>
-                      <button onClick={() => setEditingId(null)} className="btn btn-cancel">Cancel</button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div><strong>Event Name:</strong> {event.eventName}</div>
-                    <div><strong>Description:</strong> {event.description}</div>
-                    <div><strong>Start Date:</strong> {event.startDate}</div>
-                    <div><strong>End Date:</strong> {event.endDate}</div>
-                    {isAdmin && (
-                      <div className="address-actions">
-                        <button onClick={() => handleEditClick(event)} className="btn btn-edit">Edit</button>
-                        <button onClick={() => handleDelete(event.id)} className="btn btn-delete">Delete</button>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ));
-      })()}
+        )}
       </div>
     </div>
   );

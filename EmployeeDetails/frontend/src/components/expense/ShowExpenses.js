@@ -66,6 +66,68 @@ export default function ShowExpenses() {
     }
   };
 
+  const handleReceipt = (expense) => {
+    const receiptDate = new Date(expense.date).toLocaleDateString("en-IN", {
+      day: "2-digit", month: "long", year: "numeric",
+    });
+    const amount = Number(expense.amount).toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+    });
+    const receiptWindow = window.open("", "_blank", "width=700,height=600");
+    receiptWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Receipt - ${expense.name}</title>
+        <style>
+          body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 30px; color: #333; }
+          .receipt { max-width: 550px; margin: 0 auto; border: 2px solid #007bff; border-radius: 10px; padding: 30px; }
+          .header { text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 15px; margin-bottom: 20px; }
+          .header h1 { margin: 0; color: #007bff; font-size: 24px; }
+          .header p { margin: 4px 0 0; color: #666; font-size: 13px; }
+          .receipt-title { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; color: #333; }
+          .details { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+          .details td { padding: 8px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
+          .details td:first-child { font-weight: 600; color: #555; width: 40%; }
+          .amount-row td { font-size: 16px; font-weight: 700; border-top: 2px solid #007bff; border-bottom: 2px solid #007bff; }
+          .amount-row td:last-child { color: #007bff; }
+          .footer { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px dashed #ccc; color: #888; font-size: 12px; }
+          .receipt-id { text-align: right; color: #999; font-size: 12px; margin-bottom: 10px; }
+          @media print {
+            body { padding: 15px; }
+            .no-print { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="receipt">
+          <div class="header">
+            <h1>Potumeraka Village</h1>
+            <p>Community Expense Receipt</p>
+          </div>
+          <div class="receipt-id">Receipt #: ${expense.id}</div>
+          <div class="receipt-title">Expense Receipt</div>
+          <table class="details">
+            <tr><td>Name</td><td>${expense.name}</td></tr>
+            <tr><td>Description</td><td>${expense.description}</td></tr>
+            <tr><td>Activity</td><td>${expense.activityName}</td></tr>
+            <tr><td>Date</td><td>${receiptDate}</td></tr>
+            <tr class="amount-row"><td>Amount (₹)</td><td>${amount}</td></tr>
+          </table>
+          <div class="footer">
+            <p>Potumeraka Village — Expense Record</p>
+            <p>Generated on: ${new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" })}</p>
+          </div>
+          <div class="no-print" style="text-align:center; margin-top:20px;">
+            <button onclick="window.print()" style="padding:10px 30px; font-size:15px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;">Print Receipt</button>
+          </div>
+        </div>
+      </body>
+      </html>
+    `);
+    receiptWindow.document.close();
+  };
+
   if (loading) return <p className="loading-text">Loading expenses...</p>;
   if (error) return <p className="error-text">{error}</p>;
 
@@ -101,7 +163,7 @@ export default function ShowExpenses() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "750px" }}>
+      <div style={{ width: "950px" }}>
         <NavDropdowns />
 
         <div className="month-header" style={{ marginTop: 0 }}>
@@ -188,6 +250,7 @@ export default function ShowExpenses() {
                             <td style={{ padding: "8px 12px", textAlign: "center", whiteSpace: "nowrap" }}>
                               <button onClick={() => handleEditClick(expense)} className="btn btn-edit">Edit</button>
                               <button onClick={() => handleDelete(expense.id)} className="btn btn-delete">Delete</button>
+                              <button onClick={() => handleReceipt(expense)} className="btn btn-receipt">Receipt</button>
                             </td>
                           )}
                         </>

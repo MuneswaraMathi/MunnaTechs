@@ -22,6 +22,8 @@ import FundsReport from './components/contribution/FundsReport';
 import AddExpense from './components/expense/AddExpense';
 import ShowExpenses from './components/expense/ShowExpenses';
 import BalanceReport from './components/balance/BalanceReport';
+import AddTeam from './components/team/AddTeam';
+import ShowTeam from './components/team/ShowTeam';
 
 function RequireAuth({ children }) {
   const hasToken = Boolean(localStorage.getItem('token'));
@@ -89,6 +91,8 @@ function App() {
           <Route path="/expenses/addExpense" element={<RequireAuth><AddExpense /></RequireAuth>} />
           <Route path="/expenses/showExpenses" element={<RequireAuth><ShowExpenses /></RequireAuth>} />
           <Route path="/balance/balanceReport" element={<RequireAuth><BalanceReport /></RequireAuth>} />
+          <Route path="/team/addTeam" element={<RequireAuth><AddTeam /></RequireAuth>} />
+          <Route path="/team/showTeam" element={<RequireAuth><ShowTeam /></RequireAuth>} />
         </Routes>
       </div>
     </Router>
