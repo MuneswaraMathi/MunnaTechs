@@ -8,7 +8,7 @@ import "./saveContribution.css";
 import {validateContributionForm} from "./contributionValidation";
 
 export default function SaveContribution(){
-  const [form,setForm] = useState({ name:'', email:'',phoneNumber:'', amount:'', activityName:'' });
+  const [form,setForm] = useState({ name:'', email:'',phoneNumber:'', date:'', amount:'', activityName:'' });
 const [errors, setErrors] = useState({});
 const [activities, setActivities] = useState([]);
 const navigate = useNavigate();
@@ -134,6 +134,21 @@ const navigate = useNavigate();
           />
           {errors.amount && (
             <p className="error-text">{errors.amount}</p>
+          )}
+        </div>
+
+        <div>
+          <input
+            type="date"
+            className="form-input"
+            value={form.date}
+            onChange={(e) =>
+              setForm({ ...form, date: e.target.value })
+            }
+            onBlur={() => handleBlur('date')}
+          />
+          {errors.date && (
+            <p className="error-text">{errors.date}</p>
           )}
         </div>
 

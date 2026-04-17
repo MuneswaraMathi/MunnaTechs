@@ -53,3 +53,18 @@
 .btn-receipt:hover {
   background-color: #138496;
 }
+
+.btn-report {
+  background-color: #6f42c1;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-report:hover {
+  background-color: #5a32a3;
+}

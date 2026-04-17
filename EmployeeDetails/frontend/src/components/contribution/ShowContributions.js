@@ -138,6 +138,77 @@ export default function ShowContributions() {
 
   const total = filteredContributions.reduce((sum, c) => sum + Number(c.amount), 0);
 
+  const handleReport = () => {
+    const totalFormatted = total.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+    const rows = filteredContributions.map((c, i) => `
+      <tr style="border-bottom:1px solid #eee; background:${i % 2 === 0 ? '#fff' : '#f8f9fa'}">
+        <td style="padding:8px 12px; font-size:13px">${i + 1}</td>
+        <td style="padding:8px 12px; font-size:13px; white-space:nowrap">${c.name}</td>
+        <td style="padding:8px 12px; font-size:13px; white-space:nowrap">${c.email}</td>
+        <td style="padding:8px 12px; font-size:13px">${c.phoneNumber}</td>
+        <td style="padding:8px 12px; font-size:13px">${new Date(c.date).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</td>
+        <td style="padding:8px 12px; font-size:13px; text-align:right; font-weight:600">${Number(c.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+      </tr>
+    `).join("");
+    const reportWindow = window.open("", "_blank", "width=900,height=700");
+    reportWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Contributions Report - ${selectedActivity}</title>
+        <style>
+          body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 30px; color: #333; }
+          .report { max-width: 850px; margin: 0 auto; }
+          .header { text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 15px; margin-bottom: 20px; }
+          .header h1 { margin: 0; color: #007bff; font-size: 24px; }
+          .header p { margin: 4px 0 0; color: #666; font-size: 13px; }
+          .report-title { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #333; }
+          table { width: 100%; border-collapse: collapse; }
+          th { background: #007bff; color: #fff; padding: 10px 12px; font-size: 13px; text-align: left; }
+          th:last-child { text-align: right; }
+          .total-row td { background: #007bff; color: #fff; padding: 10px 12px; font-weight: 700; font-size: 14px; }
+          .footer { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px dashed #ccc; color: #888; font-size: 12px; }
+          @media print {
+            body { padding: 15px; }
+            .no-print { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="report">
+          <div class="header">
+            <h1>Potumeraka Village</h1>
+            <p>Community Contributions Report</p>
+          </div>
+          <div class="report-title">Contributions Report — ${selectedActivity}</div>
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th><th>Name</th><th>Email</th><th>Phone</th><th>Date</th><th style="text-align:right">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="5">Total — ${selectedActivity}</td>
+                <td style="text-align:right">${totalFormatted}</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div class="footer">
+            <p>Total Contributions: ${filteredContributions.length} | Total Amount: ₹ ${totalFormatted}</p>
+            <p>Generated on: ${new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" })}</p>
+          </div>
+          <div class="no-print" style="text-align:center; margin-top:20px;">
+            <button onclick="window.print()" style="padding:10px 30px; font-size:15px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;">Print Report</button>
+          </div>
+        </div>
+      </body>
+      </html>
+    `);
+    reportWindow.document.close();
+  };
+
   const inputStyle = {
     width: "100%",
     padding: "4px 6px",
@@ -276,6 +347,9 @@ export default function ShowContributions() {
                   </tr>
                 </tfoot>
               </table>
+              <div style={{ textAlign: "center", marginTop: "16px" }}>
+                <button onClick={handleReport} className="btn btn-report">Report</button>
+              </div>
             </div>
           )
         )}

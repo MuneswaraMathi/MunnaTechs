@@ -2326,3 +2326,371 @@ This generated password is for development use only. Your security configuration
 2026-04-17 17:24:34 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
 2026-04-17 17:24:34 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@42aeefea, com.example.contributions.Contribution@35f4009e, c (truncated)...]
 2026-04-17 17:24:34 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:28:28 [http-nio-8080-exec-5] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:28:28 [http-nio-8080-exec-8] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:28:28 [http-nio-8080-exec-10] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@b4a96c9, com.example.contributions.Contribution@63eb3d71, co (truncated)...]
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@69fdd4eb, com.example.activities.Activity@6b1cb442]]
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@3671fcef, com.example.expenses.Expense@13436379, com.example.expenses. (truncated)...]
+2026-04-17 17:28:28 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:28:28 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:28:28 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:29:30 [http-nio-8080-exec-3] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@291549bf, com.example.activities.Activity@75e78fb1]]
+2026-04-17 17:29:30 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:29:30 [http-nio-8080-exec-6] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@7506624b, com.example.contributions.Contribution@586b4302, c (truncated)...]
+2026-04-17 17:29:30 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:29:35 [http-nio-8080-exec-4] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@6f2680e1, com.example.activities.Activity@1dd4f8bc]]
+2026-04-17 17:29:35 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:29:40 [http-nio-8080-exec-2] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@52918e72, com.example.activities.Activity@55ad8994]]
+2026-04-17 17:29:40 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:29:42 [http-nio-8080-exec-5] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@235af1ad, com.example.activities.Activity@11df45fc]]
+2026-04-17 17:29:42 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:31:23 [http-nio-8080-exec-9] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:31:23 [http-nio-8080-exec-1] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@6dd7ba74, com.example.contributions.Contribution@1fe9fb1d, c (truncated)...]
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@38dafe30, com.example.activities.Activity@20652d99]]
+2026-04-17 17:31:23 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:31:23 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:33:42 [http-nio-8080-exec-6] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@474c6fb, com.example.activities.Activity@5e924d10]]
+2026-04-17 17:33:42 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:34:09 [http-nio-8080-exec-4] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@5058f5e4, com.example.activities.Activity@78a3604b]]
+2026-04-17 17:34:09 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:34:15 [http-nio-8080-exec-2] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@7b7d9b89, com.example.activities.Activity@66047caa]]
+2026-04-17 17:34:15 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:34:20 [http-nio-8080-exec-5] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@7a7b4b5b, com.example.activities.Activity@1a1249f9]]
+2026-04-17 17:34:20 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:35:06 [http-nio-8080-exec-10] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@4cabd51d, com.example.activities.Activity@66bc8ffe]]
+2026-04-17 17:35:06 [http-nio-8080-exec-8] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@f0bc4e7, com.example.contributions.Contribution@46e4dabd, co (truncated)...]
+2026-04-17 17:35:06 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:35:06 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:36:33 [http-nio-8080-exec-3] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@b1cae36, com.example.activities.Activity@67597973]]
+2026-04-17 17:36:33 [http-nio-8080-exec-7] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@1fa18612, com.example.expenses.Expense@1d9d780e, com.example.expenses. (truncated)...]
+2026-04-17 17:36:33 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:36:33 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:41:25 [http-nio-8080-exec-5] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:41:25 [http-nio-8080-exec-10] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:41:25 [http-nio-8080-exec-2] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@104a0abe, com.example.expenses.Expense@1bac2bd7, com.example.expenses. (truncated)...]
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@7d3fe80f, com.example.contributions.Contribution@3193c461, c (truncated)...]
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@6cb55f76, com.example.activities.Activity@3129231f]]
+2026-04-17 17:41:25 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:41:25 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:41:25 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:45:46 [http-nio-8080-exec-7] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:45:46 [http-nio-8080-exec-3] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@1830cdae, com.example.contributions.Contribution@633506d0, c (truncated)...]
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@4d19d169, com.example.activities.Activity@786e5414]]
+2026-04-17 17:45:46 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:45:46 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:47:52 [http-nio-8080-exec-2] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:47:52 [http-nio-8080-exec-5] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@95bb0ae, com.example.activities.Activity@6d764844]]
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@f9bba90, com.example.expenses.Expense@73fd26bd, com.example.expenses.E (truncated)...]
+2026-04-17 17:47:52 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:47:52 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:51:20 [http-nio-8080-exec-3] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:51:20 [http-nio-8080-exec-9] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:51:20 [http-nio-8080-exec-1] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@58021316, com.example.contributions.Contribution@5472458d, c (truncated)...]
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@26d8be42, com.example.expenses.Expense@6c9b76f0, com.example.expenses. (truncated)...]
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@18c20e86, com.example.activities.Activity@4354aaf1]]
+2026-04-17 17:51:20 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:20 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:20 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/team/showTeam", parameters={}
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.team.TeamController#getAllTeams()
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG com.example.team.TeamController - Fetching all team members
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select t1_0.id,t1_0.activity_name,t1_0.email,t1_0.father_name,t1_0.mobile_number,t1_0.name from team t1_0
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:51:35 [http-nio-8080-exec-7] INFO  com.example.team.TeamController - Retrieved 3 team members
+2026-04-17 17:51:35 [http-nio-8080-exec-4] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@7abaac1f, com.example.activities.Activity@bd7e93a]]
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.team.Team@7bef1fad, com.example.team.Team@2ea3daff, com.example.team.Team@261b2df8]]
+2026-04-17 17:51:35 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:35 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:51:50 [http-nio-8080-exec-5] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:50 [http-nio-8080-exec-6] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@791cfa06, com.example.activities.Activity@7eea5104]]
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@1790fd72, com.example.expenses.Expense@28dc41a6, com.example.expenses. (truncated)...]
+2026-04-17 17:51:50 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:50 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:51:57 [http-nio-8080-exec-2] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:51:57 [http-nio-8080-exec-8] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@43614b7e, com.example.contributions.Contribution@7398e959, c (truncated)...]
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@7e41b56f, com.example.activities.Activity@495dfd8a]]
+2026-04-17 17:51:57 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:51:57 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:53:22 [http-nio-8080-exec-1] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:53:22 [http-nio-8080-exec-7] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@67e48589, com.example.expenses.Expense@60a8d82d, com.example.expenses. (truncated)...]
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@5fbcd469, com.example.activities.Activity@5e8a2543]]
+2026-04-17 17:53:22 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:22 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/team/showTeam", parameters={}
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.team.TeamController#getAllTeams()
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG com.example.team.TeamController - Fetching all team members
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select t1_0.id,t1_0.activity_name,t1_0.email,t1_0.father_name,t1_0.mobile_number,t1_0.name from team t1_0
+2026-04-17 17:53:43 [http-nio-8080-exec-5] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@7780f965, com.example.activities.Activity@1dd398d9]]
+2026-04-17 17:53:43 [http-nio-8080-exec-4] INFO  com.example.team.TeamController - Retrieved 3 team members
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.team.Team@705c5594, com.example.team.Team@3820717a, com.example.team.Team@21472734]]
+2026-04-17 17:53:43 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:43 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:53:54 [http-nio-8080-exec-6] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:53:54 [http-nio-8080-exec-2] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@20b0b780, com.example.activities.Activity@7ad75360]]
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@1682edf7, com.example.expenses.Expense@560a6de9, com.example.expenses. (truncated)...]
+2026-04-17 17:53:54 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:53:54 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/expenses/showExpenses", parameters={}
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.expenses.ExpenseController#getAllExpenses()
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG c.example.expenses.ExpenseController - Fetching all expenses
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select e1_0.id,e1_0.activity_name,e1_0.amount,e1_0.date,e1_0.description,e1_0.name from expenses e1_0
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:57:42 [http-nio-8080-exec-1] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:57:42 [http-nio-8080-exec-9] INFO  c.example.expenses.ExpenseController - Retrieved 4 expenses
+2026-04-17 17:57:42 [http-nio-8080-exec-3] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.expenses.Expense@3d4ce267, com.example.expenses.Expense@35b5cfac, com.example.expenses. (truncated)...]
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@76bfd892, com.example.contributions.Contribution@30fb5d30, c (truncated)...]
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@70855030, com.example.activities.Activity@2bc5fba5]]
+2026-04-17 17:57:42 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:57:42 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:57:42 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:57:55 [http-nio-8080-exec-7] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@60c7d3fd, com.example.activities.Activity@17df5a63]]
+2026-04-17 17:57:55 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/contributions/showContributions", parameters={}
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.contributions.ContributionController#getAllContributions(String)
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG c.e.c.ContributionController - Fetching all contributions
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/village/potumeraka/activities/showActivities", parameters={}
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.example.activities.ActivityController#getAllActivities()
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG c.e.activities.ActivityController - Fetching all activities
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.activity_name,c1_0.amount,c1_0.date,c1_0.email,c1_0.name,c1_0.phone_number from contributions c1_0
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select a1_0.id,a1_0.activity_name,a1_0.description,a1_0.end_date,a1_0.estimation_cost,a1_0.start_date from activities a1_0
+2026-04-17 17:58:18 [http-nio-8080-exec-4] INFO  c.e.c.ContributionController - Retrieved 4 contributions
+2026-04-17 17:58:18 [http-nio-8080-exec-5] INFO  c.e.activities.ActivityController - Retrieved 2 activities
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.contributions.Contribution@5d85adb2, com.example.contributions.Contribution@51a6f013, c (truncated)...]
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [[com.example.activities.Activity@51e49754, com.example.activities.Activity@8dd18d0]]
+2026-04-17 17:58:18 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2026-04-17 17:58:18 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK

@@ -24,5 +24,9 @@ export const validateContributionForm = (form) => {
     errors.amount = "Amount must be greater than 0";
   }
 
+  if (!form.date) {
+    errors.date = "Date is required";
+  }
+
   return errors;
 };
