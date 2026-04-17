@@ -54,6 +54,12 @@ const NAV_ITEMS = [
     items: [
       { label: "Balance Report", to: "/balance/balanceReport" }
     ]
+  },
+  {
+    title: "Report",
+    items: [
+      { label: "Generate Report", to: "/report/generateReport" }
+    ]
   }
 ];
 

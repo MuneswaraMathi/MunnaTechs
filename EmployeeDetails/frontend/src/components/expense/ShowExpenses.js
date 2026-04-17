@@ -340,9 +340,11 @@ export default function ShowExpenses() {
                   </tr>
                 </tfoot>
               </table>
-              <div style={{ textAlign: "center", marginTop: "16px" }}>
-                <button onClick={handleReport} className="btn btn-report">Report</button>
-              </div>
+              {isAdmin && (
+                <div style={{ textAlign: "center", marginTop: "16px" }}>
+                  <button onClick={handleReport} className="btn btn-report">Report</button>
+                </div>
+              )}
             </div>
           )
         )}
