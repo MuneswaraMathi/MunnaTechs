@@ -82,7 +82,7 @@ return(
           <div key={field}>
             <input
               className="form-input"
-              placeholder={field}
+              placeholder={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
               value={form[field]}
               onChange={(e) =>
                 setForm({ ...form, [field]: e.target.value })
