@@ -4,6 +4,10 @@ import com.taxfiling.backend.model.User;
 import com.taxfiling.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
         Map<String, Object> response = new HashMap<>();
 
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
@@ -102,19 +106,23 @@ public class AuthController {
     // --- Inner request classes ---
 
     public static class RegistrationRequest {
-        @jakarta.validation.constraints.NotBlank
-        @jakarta.validation.constraints.Email
+        @NotBlank(message = "Email is required")
+        @Email(message = "Invalid email format")
         private String email;
 
-        @jakarta.validation.constraints.NotBlank
-        @jakarta.validation.constraints.Size(min = 6)
+        @NotBlank(message = "Password is required")
+        @Size(min = 6, message = "Password must be at least 6 characters")
+        @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*\\d).+$",
+            message = "Password must contain at least one uppercase letter and one digit"
+        )
         private String password;
 
-        @jakarta.validation.constraints.NotBlank
+        @NotBlank(message = "Confirm password is required")
         private String confirmPassword;
 
-        @jakarta.validation.constraints.NotBlank
-        @jakarta.validation.constraints.Pattern(regexp = "^[6-9]\\d{9}$")
+        @NotBlank(message = "Mobile number is required")
+        @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid mobile number")
         private String mobileNumber;
 
         public String getEmail() { return email; }
@@ -131,7 +139,11 @@ public class AuthController {
     }
 
     public static class LoginRequest {
+        @NotBlank(message = "Email is required")
+        @Email(message = "Invalid email format")
         private String email;
+
+        @NotBlank(message = "Password is required")
         private String password;
 
         public String getEmail() { return email; }
