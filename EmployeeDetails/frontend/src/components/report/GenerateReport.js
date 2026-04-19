@@ -148,14 +148,25 @@ export default function GenerateReport() {
   if (loading) return <p className="loading-text">Loading data...</p>;
   if (error) return <p className="error-text">{error}</p>;
 
+  const selectActivityStyle = {
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "5px",
+    border: "1px solid #ddd",
+    width: "98%",
+    marginBottom: "12px",
+  };
+
   const selectStyle = {
     padding: "10px",
     fontSize: "16px",
     borderRadius: "5px",
     border: "1px solid #ddd",
-    width: "100%",
+    width: "96%",
     marginBottom: "12px",
   };
+
+  
 
   const radioLabelStyle = {
     color: "#fff",
@@ -220,7 +231,7 @@ export default function GenerateReport() {
         <select
           value={selectedActivity}
           onChange={(e) => setSelectedActivity(e.target.value)}
-          style={selectStyle}
+          style={selectActivityStyle}
         >
           <option value="">-- All Activities --</option>
           {activities.map((a) => (

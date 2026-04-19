@@ -106,15 +106,6 @@ export default function BalanceReport() {
   if (loading) return <p className="loading-text">Loading balance report...</p>;
   if (error) return <p className="error-text">{error}</p>;
 
-  const rowStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "14px 20px",
-    fontSize: "16px",
-    borderBottom: "1px solid #eee",
-  };
-
   return (
     <div style={{
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${process.env.PUBLIC_URL}/images/village3.jpg')`,
@@ -132,7 +123,7 @@ export default function BalanceReport() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "750px" }}>
+      <div style={{ width: "950px" }}>
         <NavDropdowns />
 
         <div className="month-header" style={{ marginTop: 0 }}>
@@ -155,51 +146,44 @@ export default function BalanceReport() {
 
         {selectedActivity && (
           <>
-            <div style={{
-              backgroundColor: "#fff",
-              borderRadius: "8px",
-              overflow: "hidden",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-            }}>
-            <div style={{
-              backgroundColor: "#007bff",
-              color: "#fff",
-              padding: "12px 20px",
-              fontSize: "16px",
-              fontWeight: 700,
-            }}>
-              {selectedActivity}
-            </div>
-
-            <div style={{ ...rowStyle, backgroundColor: "#fff" }}>
-              <span style={{ fontWeight: 600 }}>Funds Total</span>
-              <span style={{ fontWeight: 700, color: "#28a745" }}>
-                {fundsTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
-              </span>
-            </div>
-
-            <div style={{ ...rowStyle, backgroundColor: "#f8f9fa" }}>
-              <span style={{ fontWeight: 600 }}>Expenses Total</span>
-              <span style={{ fontWeight: 700, color: "#dc3545" }}>
-                {expensesTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
-              </span>
-            </div>
-
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "14px 20px",
-              fontSize: "17px",
-              fontWeight: 700,
-              backgroundColor: balance >= 0 ? "#28a745" : "#dc3545",
-              color: "#fff",
-            }}>
-              <span>Balance Amount</span>
-              <span>
-                {balance.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
-              </span>
-            </div>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+              }}>
+                <thead>
+                  <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
+                    <th style={{ padding: "10px 12px", textAlign: "left", fontSize: "14px" }}>Description</th>
+                    <th style={{ padding: "10px 12px", textAlign: "right", fontSize: "14px" }}>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style={{ borderBottom: "1px solid #eee", backgroundColor: "#fff" }}>
+                    <td style={{ padding: "8px 12px", fontSize: "14px", fontWeight: 600 }}>Funds Total</td>
+                    <td style={{ padding: "8px 12px", fontSize: "14px", textAlign: "right", fontWeight: 700, color: "#28a745" }}>
+                      {fundsTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                    </td>
+                  </tr>
+                  <tr style={{ borderBottom: "1px solid #eee", backgroundColor: "#f8f9fa" }}>
+                    <td style={{ padding: "8px 12px", fontSize: "14px", fontWeight: 600 }}>Expenses Total</td>
+                    <td style={{ padding: "8px 12px", fontSize: "14px", textAlign: "right", fontWeight: 700, color: "#dc3545" }}>
+                      {expensesTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr style={{ backgroundColor: balance >= 0 ? "#007bff" : "#dc3545", color: "#fff" }}>
+                    <td style={{ padding: "10px 12px", fontWeight: 700, fontSize: "15px" }}>Balance Amount</td>
+                    <td style={{ padding: "10px 12px", textAlign: "right", fontWeight: 700, fontSize: "15px" }}>
+                      {balance.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
             {isAdmin && (
               <div style={{ textAlign: "center", marginTop: "16px" }}>

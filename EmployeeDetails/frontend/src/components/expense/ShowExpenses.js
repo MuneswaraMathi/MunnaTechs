@@ -329,7 +329,7 @@ export default function ShowExpenses() {
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr style={{ backgroundColor: "#dc3545", color: "#fff" }}>
+                  <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
                     <td colSpan={isAdmin ? 5 : 4} style={{ padding: "10px 12px", fontWeight: 700, fontSize: "15px" }}>
                       Total — {selectedActivity}
                     </td>

@@ -51,7 +51,7 @@ export default function FundsReport() {
       justifyContent: 'center',
       alignItems: 'flex-start',
     }}>
-      <div style={{ width: "750px" }}>
+      <div style={{ width: "950px" }}>
         <NavDropdowns />
 
         <div className="month-header" style={{ marginTop: 0 }}>
